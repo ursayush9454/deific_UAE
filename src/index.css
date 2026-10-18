@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes floatA {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+}
+@keyframes floatB {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(1.5deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(1.5deg);
+  }
+}
+@keyframes floatC {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+}
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(54px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(54px) rotate(-360deg);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 0 76% 40%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 76% 40%;
+    --radius: 0.5rem;
+    --gradient-primary: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+    --shadow-glow: 0 4px 24px rgba(185, 28, 28, 0.25);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+}
+
+/* Version 1: pulsing neon glow */
+.neon-pulse {
+  border: 1px solid #ff2a4d;
+  box-shadow:
+    0 0 6px #ff2a4d,
+    0 0 18px rgba(255, 42, 77, 0.55),
+    inset 0 0 8px rgba(255, 42, 77, 0.35);
+  animation: neon-pulse 2s ease-in-out infinite;
+  transition: transform 0.2s;
+}
+.neon-pulse:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 4px #ff2a4d,
+      0 0 12px rgba(255, 42, 77, 0.4),
+      inset 0 0 6px rgba(255, 42, 77, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 8px #ff2a4d,
+      0 0 28px rgba(255, 42, 77, 0.8),
+      inset 0 0 12px rgba(255, 42, 77, 0.5);
+  }
+}
+
+/* Version 2: neon light running around the border */
+.neon-spin {
+  position: relative;
+  display: inline-flex;
+  padding: 2px; /* border thickness */
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 0 22px rgba(255, 42, 77, 0.45);
+}
+.neon-spin::before {
+  content: "";
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 55%,
+    #ff2a4d 80%,
+    #ff9aa9 100%
+  );
+  animation: neon-rotate 3s linear infinite;
+}
+.neon-spin > span {
+  position: relative;
+  z-index: 1;
+  border-radius: 6px;
+  background: #0b0b0f; /* button ka andar ka color */
+}
+@keyframes neon-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-pulse,
+  .neon-spin::before {
+    animation: none;
+  }
+}
+
+/* ───────────── 2026 redesign tokens & helpers ───────────── */
+html { scroll-behavior: smooth; }
+body { color: #121A33; -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 2px solid #D7141C; outline-offset: 3px; border-radius: 6px; }
+
+.font-display { font-variation-settings: "wdth" 94, "opsz" 72; letter-spacing: -0.018em; }
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+/* subtle dot grid used behind the hero console */
+.dd-grid {
+  background-image: radial-gradient(rgba(11,31,77,0.13) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@keyframes dd-row-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.dd-row-in { animation: dd-row-in 360ms cubic-bezier(.2,.7,.2,1) both; }
+
+@keyframes dd-nudge {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(215,20,28,0.0); }
+  50% { box-shadow: 0 0 0 8px rgba(215,20,28,0.16); }
+}
+.dd-nudge { animation: dd-nudge 1.6s ease-in-out 3; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .dd-row-in, .dd-nudge { animation: none; }
+}
+
+/* keep the voice-agent launcher above the mobile action bar */
+@media (max-width: 767px) {
+  #dg-launcher { bottom: 78px !important; }
+  #dg-window { bottom: 146px !important; }
+}
+
+/* ── Arabic (right-to-left) ── */
+html[dir="rtl"] body { font-family: "IBM Plex Sans Arabic", "Outfit", system-ui, sans-serif; }
+html[dir="rtl"] .font-display {
+  font-family: "Noto Kufi Arabic Variable", "IBM Plex Sans Arabic", sans-serif;
+  letter-spacing: 0;
+  font-variation-settings: normal;
+  line-height: 1.32 !important;
+}
+html[dir="rtl"] h1.font-display { line-height: 1.38 !important; }
+
+.font-brand { font-family: "Bricolage Grotesque Variable", "Outfit", sans-serif; font-variation-settings: "wdth" 94, "opsz" 72; letter-spacing: -0.018em; }
