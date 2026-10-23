@@ -70,6 +70,9 @@
     --input: 0 0% 89.8%;
     --ring: 0 76% 40%;
     --radius: 0.5rem;
+    --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-arabic: "IBM Plex Sans Arabic", "Plus Jakarta Sans", system-ui, sans-serif;
     --gradient-primary: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
     --shadow-glow: 0 4px 24px rgba(185, 28, 28, 0.25);
   }
@@ -87,7 +90,10 @@
 }
 
 body {
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Version 1: pulsing neon glow */
@@ -162,10 +168,12 @@ body {
 
 /* ───────────── 2026 redesign tokens & helpers ───────────── */
 html { scroll-behavior: smooth; }
-body { color: #121A33; -webkit-font-smoothing: antialiased; }
+body { color: #121A33; -webkit-font-smoothing: antialiased; overflow-x: clip; overflow-wrap: break-word; }
+img, video { max-width: 100%; height: auto; }
+h1, h2, h3 { text-wrap: balance; }
 :focus-visible { outline: 2px solid #D7141C; outline-offset: 3px; border-radius: 6px; }
 
-.font-display { font-variation-settings: "wdth" 94, "opsz" 72; letter-spacing: -0.018em; }
+.font-display { font-family: var(--font-sans); letter-spacing: -0.025em; }
 .text-balance { text-wrap: balance; }
 .text-pretty { text-wrap: pretty; }
 
@@ -198,14 +206,29 @@ body { color: #121A33; -webkit-font-smoothing: antialiased; }
   #dg-window { bottom: 146px !important; }
 }
 
-/* ── Arabic (right-to-left) ── */
-html[dir="rtl"] body { font-family: "IBM Plex Sans Arabic", "Outfit", system-ui, sans-serif; }
+/* ── Arabic (right-to-left): Plus Jakarta Sans pehle (numbers / English words), phir IBM Plex Sans Arabic ── */
+html[dir="rtl"] body { font-family: "Plus Jakarta Sans", var(--font-arabic); }
 html[dir="rtl"] .font-display {
-  font-family: "Noto Kufi Arabic Variable", "IBM Plex Sans Arabic", sans-serif;
+  font-family: "Plus Jakarta Sans", var(--font-arabic);
   letter-spacing: 0;
-  font-variation-settings: normal;
-  line-height: 1.32 !important;
+  line-height: 1.35 !important;
 }
-html[dir="rtl"] h1.font-display { line-height: 1.38 !important; }
+html[dir="rtl"] h1.font-display { line-height: 1.4 !important; }
 
-.font-brand { font-family: "Bricolage Grotesque Variable", "Outfit", sans-serif; font-variation-settings: "wdth" 94, "opsz" 72; letter-spacing: -0.018em; }
+.font-brand { font-family: var(--font-sans); letter-spacing: -0.02em; }
+
+/* ── Header: India wala hi header har page / language (India, UAE EN, UAE عربي, USA) par ──
+   Arabic mode mein bhi header mirror nahi hota, font aur line-height same rehte hain. */
+.site-header { direction: ltr; text-align: left; line-height: 1.5; font-family: var(--font-sans); }
+
+/* ── Mobile forms ──
+   iOS Safari 16px se chhote field par zoom kar deta hai aur layout hil jata hai. */
+input, select, textarea, button { font-family: inherit; }
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select,
+textarea { max-width: 100%; min-width: 0; }
+@media (max-width: 767px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea { font-size: 16px !important; }
+}

@@ -67,7 +67,7 @@ export default function ProductDetailPage() {
           <div className="grid gap-4 mt-5 md:grid-cols-3">
             {others.map((o) => (
               <Link key={o.slug} to={`/products/${o.slug}`} className="flex items-center gap-4 p-3 bg-white border rounded-xl border-dd-line hover:border-dd-red/40">
-                <img src={o.image} alt="" loading="lazy" className="object-cover w-20 h-16 rounded-lg" />
+                <img src={o.image} alt="" loading="lazy" className="object-contain w-20 h-16 rounded-lg" />
                 <div><p className="font-semibold text-dd-ink">{o.name}</p><p className="text-[13px] text-dd-slate">{o.tag}</p></div>
               </Link>
             ))}

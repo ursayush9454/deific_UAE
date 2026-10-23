@@ -25,7 +25,6 @@ export default function UAELandingPage() {
   return (
     <div ref={rootRef} dir="rtl" lang="ar" className="uae-page">
       <style dangerouslySetInnerHTML={{ __html: `
-        @import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@300;400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap');
 
         .uae-page{
           --red:#C8102E;
@@ -37,9 +36,9 @@ export default function UAELandingPage() {
           --muted:rgba(27,15,18,.62);
           --line:rgba(200,16,46,.18);
           --radius:18px;
-          --font-display:'El Messiri', serif;
-          --font-body:'Tajawal', sans-serif;
-          --font-utility:'IBM Plex Sans Arabic', sans-serif;
+          --font-display:'Plus Jakarta Sans','IBM Plex Sans Arabic',system-ui,sans-serif;
+          --font-body:'Plus Jakarta Sans','IBM Plex Sans Arabic',system-ui,sans-serif;
+          --font-utility:'Plus Jakarta Sans','IBM Plex Sans Arabic',system-ui,sans-serif;
 
           font-family:var(--font-body);
           background:var(--offwhite);

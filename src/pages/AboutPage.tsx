@@ -139,7 +139,7 @@
 //                 <span className="inline-block bg-red-600/20 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full border border-white/20 mb-4">
 //                     About Us
 //                 </span>
-//                 <h1 className="text-5xl font-bold tracking-tight text-white md:text-6xl font-display">
+//                 <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl font-display">
 //                     Who We Are
 //                 </h1>
 //                 <p className="max-w-xl mx-auto mt-3 text-lg text-white/80">
@@ -174,7 +174,7 @@
 //                     <div className="grid grid-cols-3 gap-6">
 //                         {stats.map((s) => (
 //                             <div key={s.label} className="text-center border-r border-gray-200 last:border-r-0">
-//                                 <p className="text-4xl font-extrabold text-red-600">{s.value}</p>
+//                                 <p className="text-2xl font-extrabold text-red-600 sm:text-4xl">{s.value}</p>
 //                                 <p className="mt-1 text-sm text-gray-500">{s.label}</p>
 //                             </div>
 //                         ))}
@@ -263,7 +263,7 @@
 //                         </blockquote>
 //                         <p className="text-base leading-relaxed text-gray-600">{bio1}</p>
 //                         <p className="text-base leading-relaxed text-gray-600">{bio2}</p>
-//                         <div className="grid grid-cols-3 gap-4 mt-4">
+//                         <div className="grid grid-cols-3 gap-2 mt-4 sm:gap-4">
 //                             <div className="p-4 text-center bg-white border border-gray-100 shadow-sm rounded-xl">
 //                                 <Users className="w-6 h-6 mx-auto mb-2 text-red-600" />
 //                                 <p className="text-sm font-bold text-gray-900">50+</p>
@@ -299,7 +299,7 @@
 //                 <span className="inline-block bg-red-100 text-red-700 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
 //                     Our Vision
 //                 </span>
-//                 <h2 className="text-5xl md:text-6xl font-bold text-gray-900 font-display leading-[1.1] mb-6">
+//                 <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 font-display leading-[1.1] mb-6">
 //                     Our <span className="text-red-600">Vision</span>
 //                 </h2>
 //                 <div className="w-20 h-1 mx-auto mb-8 bg-red-600 rounded-full" />
@@ -324,7 +324,7 @@
 //                 <span className="inline-block bg-red-100 text-red-700 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
 //                     Our Missions
 //                 </span>
-//                 <h2 className="text-5xl md:text-6xl font-bold text-gray-900 font-display leading-[1.1] mb-4">
+//                 <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 font-display leading-[1.1] mb-4">
 //                     Our <span className="text-red-600">Missions</span>
 //                 </h2>
 //                 <div className="w-20 h-1 mx-auto mb-6 bg-red-600 rounded-full" />
@@ -723,7 +723,7 @@ function Breadcrumb() {
                 <span className="inline-block bg-red-600/20 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full border border-white/20 mb-4">
                     About Us
                 </span>
-                <h1 className="text-5xl font-bold tracking-tight text-white md:text-6xl font-display">
+                <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl font-display">
                     Who We Are
                 </h1>
                 <p className="max-w-xl mx-auto mt-3 text-lg text-white/80">
@@ -755,10 +755,10 @@ function HeroSection() {
                         applications, mobile apps, and business solutions tailored to meet
                         the evolving needs of modern organizations.
                     </p>
-                    <div className="grid grid-cols-3 gap-6">
+                    <div className="grid grid-cols-3 gap-3 sm:gap-6">
                         {stats.map((s) => (
                             <div key={s.label} className="text-center border-r border-gray-200 last:border-r-0">
-                                <p className="text-4xl font-extrabold text-red-600">{s.value}</p>
+                                <p className="text-2xl font-extrabold text-red-600 sm:text-4xl">{s.value}</p>
                                 <p className="mt-1 text-sm text-gray-500">{s.label}</p>
                             </div>
                         ))}
@@ -847,7 +847,7 @@ function AboutDetailSection() {
                         </blockquote>
                         <p className="text-base leading-relaxed text-gray-600">{bio1}</p>
                         <p className="text-base leading-relaxed text-gray-600">{bio2}</p>
-                        <div className="grid grid-cols-3 gap-4 mt-4">
+                        <div className="grid grid-cols-3 gap-2 mt-4 sm:gap-4">
                             <div className="p-4 text-center bg-white border border-gray-100 shadow-sm rounded-xl">
                                 <Users className="w-6 h-6 mx-auto mb-2 text-red-600" />
                                 <p className="text-sm font-bold text-gray-900">50+</p>
@@ -883,7 +883,7 @@ function VisionSection() {
                 <span className="inline-block bg-red-100 text-red-700 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
                     Our Vision
                 </span>
-                <h2 className="text-5xl md:text-6xl font-bold text-gray-900 font-display leading-[1.1] mb-6">
+                <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 font-display leading-[1.1] mb-6">
                     Our <span className="text-red-600">Vision</span>
                 </h2>
                 <div className="w-20 h-1 mx-auto mb-8 bg-red-600 rounded-full" />
@@ -908,7 +908,7 @@ function MissionsSection() {
                 <span className="inline-block bg-red-100 text-red-700 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
                     Our Missions
                 </span>
-                <h2 className="text-5xl md:text-6xl font-bold text-gray-900 font-display leading-[1.1] mb-4">
+                <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 font-display leading-[1.1] mb-4">
                     Our <span className="text-red-600">Missions</span>
                 </h2>
                 <div className="w-20 h-1 mx-auto mb-6 bg-red-600 rounded-full" />
@@ -1122,14 +1122,6 @@ export default function AboutPage() {
 
             {/* Font styles and animations */}
             <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-                .font-display {
-                font-family: 'Playfair Display', serif;
-                }
-                body {
-                font-family: 'Inter', sans-serif;
-                }
                 html {
                 scroll-behavior: smooth;
                 }

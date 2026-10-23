@@ -350,7 +350,7 @@ export default function ChatWidget() {
           --dg-accent: #FF5A36;
           --dg-user-bubble: #2A2E38;
           --dg-mono: 'IBM Plex Mono', 'Courier New', monospace;
-          --dg-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          --dg-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         #dg-launcher {
           position: fixed; bottom: 24px; right: 24px; width: 58px; height: 58px;

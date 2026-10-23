@@ -1,7 +1,7 @@
-import chatbot from "../assets/chatbot.webp";
-import landImg from "../assets/green-land.webp";
-import automation from "../assets/automation.webp";
-import heroTech from "../assets/hero-tech.webp";
+import receptionistImg from "../assets/medcare.png";
+import propAiImg from "../assets/propai.png";
+import salesAgentImg from "../assets/salesagent.png";
+import supportImg from "../assets/customer.png";
 
 export type Product = {
   slug: string;
@@ -26,7 +26,7 @@ export const products: Product[] = [
     name: "AI Receptionist",
     tag: "Healthcare",
     navLine: "For clinics, polyclinics and hospitals",
-    image: chatbot,
+    image: receptionistImg,
     headline: "A front desk that books appointments on WhatsApp.",
     description: "Patients message on WhatsApp and the agent books the appointment. No queues, no busy phone lines.",
     problem: "Front desk staff spend the day noting down names and slots.",
@@ -40,8 +40,8 @@ export const products: Product[] = [
     slug: "prop-ai",
     name: "Prop AI",
     tag: "Real estate",
-    navLine: "WhatsApp chatbot for real estate",
-    image: landImg,
+    navLine: "Complete Site Booking System",
+    image: propAiImg,
     headline: "Every lead gets a reply in seconds, and a temperature.",
     description: "A WhatsApp chatbot that talks to every lead and shows you who is actually serious.",
     problem: "Leads go cold and nobody knows who to call first.",
@@ -56,7 +56,7 @@ export const products: Product[] = [
     name: "AI Sales Agent",
     tag: "Sales",
     navLine: "For sales teams and growing businesses",
-    image: automation,
+    image: salesAgentImg,
     headline: "It finds the leads and hands you only the hot ones.",
     description: "Finding and chasing leads is slow work. The agent does it and delivers leads that are ready to close.",
     problem: "Your team spends more time searching than selling.",
@@ -71,7 +71,7 @@ export const products: Product[] = [
     name: "AI Customer Support",
     tag: "Support",
     navLine: "For any business with customer queries",
-    image: heroTech,
+    image: supportImg,
     headline: "Customer questions answered instantly.",
     description: "The agent solves repeat queries right away, so your team can focus on the cases that need a human.",
     problem: "Your team answers the same questions all day.",

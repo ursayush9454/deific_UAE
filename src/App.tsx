@@ -3,13 +3,6 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ScrollToTop } from "./hooks/ScrollToTop";
 import { lazy, Suspense } from "react";
-import "@fontsource/outfit/400.css";
-import "@fontsource/outfit/500.css";
-import "@fontsource/outfit/600.css";
-import "@fontsource/outfit/700.css";
-import "@fontsource/outfit/800.css";
-import "@fontsource-variable/bricolage-grotesque/standard.css";
-import "@fontsource-variable/noto-kufi-arabic/index.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-500.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
@@ -42,7 +35,7 @@ const PropAIDataDeletion = lazy(() => import("@/pages/PropAIDataDeletion"));
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
@@ -239,7 +232,7 @@ export function AppRoutes() {
               <Layout>
                 <div className="flex items-center justify-center min-h-[50vh] text-center">
                   <div>
-                    <h1 className="text-4xl font-bold mb-4">404</h1>
+                    <h1 className="mb-4 text-4xl font-bold">404</h1>
                     <p className="text-muted-foreground">Page not found</p>
                   </div>
                 </div>

@@ -2,38 +2,39 @@ import { Link } from "react-router-dom";
 import { Facebook, Linkedin, Instagram, Mail, Phone, MessageCircle } from "lucide-react";
 import logo from "../../assets/dd.webp";
 import { SITE, waLink } from "../../static/siteConfig";
+import { servicesMenu } from "../../static/servicesData";
+import { products, companyLinks } from "../../static/productsData";
 
-const columns = [
-  {
-    title: "AI & Automation",
-    links: [
-      ["/ai-agents", "AI Agents"],
-      ["/services/automation", "Automation Flows"],
-      ["/services/chatbots-virtual-assistants", "WhatsApp AI Agent"],
-      ["/propai", "Real Estate Automation"],
-      ["/#industries", "Hospital, CA & Car Dealer Automation"],
-    ],
-  },
-  {
-    title: "Development",
-    links: [
-      ["/services/mvp-development", "Web Applications"],
-      ["/services/android-app-development", "Android Apps"],
-      ["/services/ios-app-development", "iOS Apps"],
-      ["/contact", "Game Development"],
-      ["/contact", "Smart City Solutions"],
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      ["/about", "About Us"],
-      ["/portfolio", "Work & Clients"],
-      ["/careers", "Careers"],
-      ["/blog", "Blog"],
-      ["/contact", "Contact"],
-    ],
-  },
+type FooterLink = readonly [string, string];
+type FooterColumn = { title: string; links: FooterLink[] };
+
+// Header ke saare links footer mein bhi hain. Services / Products / Company data se auto-aate hain,
+// isliye header mein kuch add karo to footer mein khud aa jayega.
+const serviceColumns: FooterColumn[] = servicesMenu.map((col) => ({
+  title: col.title,
+  links: col.items
+    ? col.items.map((i) => [i.to, i.label] as const)
+    : col.to
+      ? [[col.to, col.title] as const]
+      : [],
+}));
+
+const productLinks: FooterLink[] = [
+  ["/products", "All Products"],
+  ...products.map((p) => [`/products/${p.slug}`, p.name] as const),
+];
+
+const companyColumnLinks: FooterLink[] = [
+  ...companyLinks.map((c) => [c.to, c.label] as const),
+  ["/industries", "Industries"],
+  ["/ai-agents", "AI Agents"],
+  ["/contact", "Contact"],
+];
+
+const columns: FooterColumn[] = [
+  { title: "Products", links: productLinks },
+  ...serviceColumns,
+  { title: "Company", links: companyColumnLinks },
   {
     title: "Regions",
     links: [
@@ -43,7 +44,7 @@ const columns = [
       ["/usa", "USA"],
     ],
   },
-] as const;
+];
 
 export function Footer() {
   const social = [
@@ -55,7 +56,7 @@ export function Footer() {
   return (
     <footer className="bg-[#081633] pb-16 text-white md:pb-0">
       <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
+        <div className="grid gap-12 lg:grid-cols-[1fr_2.6fr]">
           <div>
             <Link to="/" className="flex items-center gap-2.5" dir="ltr">
               <img src={logo} alt="" width={34} height={34} className="h-[34px] w-[34px] rounded-lg" />
@@ -107,14 +108,14 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3">
             {columns.map((c) => (
               <div key={c.title}>
                 <p className="text-[14px] font-semibold text-white">{c.title}</p>
                 <ul className="mt-4 space-y-2.5">
                   {c.links.map(([to, label]) => (
-                    <li key={label}>
-                      <Link to={to} className="text-[14px] text-white/60 hover:text-white">
+                    <li key={`${to}-${label}`}>
+                      <Link to={to} className="text-[14px] leading-snug text-white/60 transition-colors hover:text-white">
                         {label}
                       </Link>
                     </li>

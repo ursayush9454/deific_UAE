@@ -254,15 +254,11 @@ export default function ContactPage() {
     // };
 
     const getLabelClass = (fieldName: string) => {
-        const hasValue =
-            formData[fieldName as keyof typeof formData]?.length > 0;
-        const isTouched = touched[fieldName];
-        const hasError = errors[fieldName];
-        return `absolute left-11 transition-all duration-200 pointer-events-none ${
-            hasValue || isTouched
-                ? "top-1 text-xs text-gray-400"
-                : "top-3.5 text-sm text-gray-400"
-        } ${hasError ? "text-red-500" : ""}`;
+        const hasError = errors[fieldName] && touched[fieldName];
+        // Label focus ya value hone par upar float karta hai (peer = input), typed text se overlap nahi
+        return `pointer-events-none absolute left-11 top-4 text-base transition-all duration-200 ${
+            hasError ? "text-red-500" : "text-gray-400 peer-focus:text-red-500"
+        } peer-focus:top-2 peer-focus:text-xs peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs`;
     };
 
     const faqs = [
@@ -509,7 +505,8 @@ export default function ContactPage() {
                                     <form
                                         ref={formRef}
                                         onSubmit={handleSubmit}
-                                        className="relative z-10 space-y-6"
+                                        dir="ltr"
+                                        className="relative z-10 space-y-5 sm:space-y-6"
                                     >
                                         <div>
                                             <h3 className="text-2xl font-bold text-gray-900">
@@ -524,10 +521,11 @@ export default function ContactPage() {
                                         <div className="grid gap-5 sm:grid-cols-2">
                                             {/* First Name */}
                                             <div className="relative">
-                                                <User className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 transition-colors peer-focus:text-red-500" />
+                                                <User className="pointer-events-none absolute left-3.5 top-[1.125rem] h-5 w-5 text-gray-400" />
                                                 <input
                                                     type="text"
                                                     name="firstName"
+                                                    autoComplete="given-name"
                                                     value={formData.firstName}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
@@ -537,7 +535,7 @@ export default function ContactPage() {
                                                         touched.firstName
                                                             ? "border-red-500 ring-2 ring-red-500/20"
                                                             : "border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
-                                                    } bg-gray-50/50 pl-10 pr-4 py-3.5 text-sm outline-none transition-all peer`}
+                                                    } h-14 bg-gray-50/50 pl-11 pr-4 pt-5 pb-1.5 text-base outline-none transition-all peer`}
                                                 />
                                                 <label
                                                     className={getLabelClass(
@@ -557,10 +555,11 @@ export default function ContactPage() {
 
                                             {/* Last Name */}
                                             <div className="relative">
-                                                <User className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 transition-colors peer-focus:text-red-500" />
+                                                <User className="pointer-events-none absolute left-3.5 top-[1.125rem] h-5 w-5 text-gray-400" />
                                                 <input
                                                     type="text"
                                                     name="lastName"
+                                                    autoComplete="family-name"
                                                     value={formData.lastName}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
@@ -570,7 +569,7 @@ export default function ContactPage() {
                                                         touched.lastName
                                                             ? "border-red-500 ring-2 ring-red-500/20"
                                                             : "border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
-                                                    } bg-gray-50/50 pl-10 pr-4 py-3.5 text-sm outline-none transition-all peer`}
+                                                    } h-14 bg-gray-50/50 pl-11 pr-4 pt-5 pb-1.5 text-base outline-none transition-all peer`}
                                                 />
                                                 <label
                                                     className={getLabelClass(
@@ -591,10 +590,11 @@ export default function ContactPage() {
 
                                         {/* Email */}
                                         <div className="relative">
-                                            <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 transition-colors peer-focus:text-red-500" />
+                                            <Mail className="pointer-events-none absolute left-3.5 top-[1.125rem] h-5 w-5 text-gray-400" />
                                             <input
                                                 type="email"
                                                 name="email"
+                                                    autoComplete="email"
                                                 value={formData.email}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
@@ -603,7 +603,7 @@ export default function ContactPage() {
                                                     errors.email && touched.email
                                                         ? "border-red-500 ring-2 ring-red-500/20"
                                                         : "border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
-                                                } bg-gray-50/50 pl-10 pr-4 py-3.5 text-sm outline-none transition-all peer`}
+                                                } h-14 bg-gray-50/50 pl-11 pr-4 pt-5 pb-1.5 text-base outline-none transition-all peer`}
                                             />
                                             <label
                                                 className={getLabelClass(
@@ -622,10 +622,12 @@ export default function ContactPage() {
 
                                         {/* Phone */}
                                         <div className="relative">
-                                            <Phone className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 transition-colors peer-focus:text-red-500" />
+                                            <Phone className="pointer-events-none absolute left-3.5 top-[1.125rem] h-5 w-5 text-gray-400" />
                                             <input
                                                 type="tel"
+                                                inputMode="tel"
                                                 name="phone"
+                                                    autoComplete="tel"
                                                 value={formData.phone}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
@@ -634,7 +636,7 @@ export default function ContactPage() {
                                                     errors.phone && touched.phone
                                                         ? "border-red-500 ring-2 ring-red-500/20"
                                                         : "border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
-                                                } bg-gray-50/50 pl-10 pr-4 py-3.5 text-sm outline-none transition-all peer`}
+                                                } h-14 bg-gray-50/50 pl-11 pr-4 pt-5 pb-1.5 text-base outline-none transition-all peer`}
                                             />
                                             <label
                                                 className={getLabelClass(
@@ -710,7 +712,7 @@ export default function ContactPage() {
 
                                         {/* Message */}
                                         <div className="relative">
-                                            <MessageSquare className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 transition-colors peer-focus:text-red-500" />
+                                            <MessageSquare className="pointer-events-none absolute left-3.5 top-[1.125rem] h-5 w-5 text-gray-400" />
                                             <textarea
                                                 name="message"
                                                 rows={4}
@@ -723,12 +725,10 @@ export default function ContactPage() {
                                                     touched.message
                                                         ? "border-red-500 ring-2 ring-red-500/20"
                                                         : "border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
-                                                } bg-gray-50/50 pl-10 pr-4 py-3.5 text-sm outline-none transition-all resize-none peer`}
+                                                } bg-gray-50/50 pl-11 pr-4 pt-7 pb-3 text-base outline-none transition-all resize-none peer`}
                                             />
                                             <label
-                                                className={`${getLabelClass(
-                                                    "message"
-                                                )} top-3.5`}
+                                                className={`${getLabelClass("message")}`}
                                             >
                                                 Message *
                                             </label>

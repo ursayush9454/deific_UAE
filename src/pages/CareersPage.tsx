@@ -498,7 +498,7 @@ export default function CareersPage() {
                     {/* ===== QUOTE / TESTIMONIAL ===== */}
                     <div className="mt-14 bg-gradient-to-r from-red-600 to-red-700 rounded-3xl p-6 md:p-10 text-center shadow-xl shadow-red-200/50">
                         <div className="max-w-3xl mx-auto">
-                            <div className="text-5xl text-white/30 font-serif leading-none mb-2">
+                            <div className="text-5xl text-white/30 font-display leading-none mb-2">
                                 "
                             </div>
                             <p className="text-white text-lg md:text-xl font-medium leading-relaxed italic">
@@ -547,11 +547,6 @@ export default function CareersPage() {
 
             {/* ===== ANIMATION STYLES ===== */}
             <style dangerouslySetInnerHTML={{ __html: `
-                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap');
-
-                .font-display {
-                    font-family: 'Playfair Display', serif;
-                }
 
                 @keyframes fadeInUp {
                     from { opacity: 0; transform: translateY(40px); }

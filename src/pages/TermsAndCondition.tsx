@@ -18,7 +18,7 @@ function Breadcrumb() {
         <span className="inline-block bg-red-600/20 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full border border-white/20 mb-4">
           Legal
         </span>
-        <h1 className="text-5xl md:text-6xl font-bold text-white font-display tracking-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white font-display tracking-tight">
           Terms & Conditions
         </h1>
         <p className="mt-3 text-white/80 text-lg max-w-xl mx-auto">
@@ -238,14 +238,6 @@ export default function TermsPage() {
       <CTABanner />
 
       <style dangerouslySetInnerHTML={{ __html: `
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-        .font-display {
-          font-family: 'Playfair Display', serif;
-        }
-        body {
-          font-family: 'Inter', sans-serif;
-        }
         html {
           scroll-behavior: smooth;
         }

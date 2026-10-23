@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
  *
  * Self-contained: styles are scoped under .deific-landing so they
  * won't leak into the rest of your app. Uses the site's existing
- * 'Outfit' font (already loaded globally via @fontsource in App.tsx).
+ * Plus Jakarta Sans font (loaded globally in index.html).
  */
 
 const TERMINAL_LINES = [
@@ -63,9 +63,9 @@ export default function USALandingPage() {
           --lo:#6E6870;
           --lo-2:#9A939A;
 
-          --display: 'Outfit', system-ui, sans-serif;
-          --body: 'Outfit', system-ui, sans-serif;
-          --mono: 'Outfit', system-ui, sans-serif;
+          --display: var(--font-sans);
+          --body: var(--font-sans);
+          --mono: var(--font-sans);
 
           background: var(--bg);
           color: var(--hi);

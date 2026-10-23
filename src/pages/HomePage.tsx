@@ -253,7 +253,7 @@ export default function HomePage({ variant = "IN" }: { variant?: VariantId }) {
               <Zap className="h-3.5 w-3.5 text-dd-red" />
               {R.kicker}
             </p>
-            <h1 className={`font-display font-semibold leading-[0.98] text-dd-ink ${c.lang === "ar" ? "text-[clamp(36px,4.6vw,60px)]" : "text-[clamp(44px,6.4vw,78px)]"}`}>
+            <h1 className={`font-display font-semibold leading-[0.98] text-dd-ink ${c.lang === "ar" ? "text-[clamp(36px,4.6vw,60px)]" : "text-[clamp(32px,4.4vw,62px)]"}`}>
               {c.hero.line1} <br className="hidden lg:block" />
               <span className={c.lang === "ar" ? "" : "whitespace-nowrap"}>
                 {c.hero.on} <ModeSwitch on={auto} onToggle={toggle} nudge={!touched.current} label={c.hero.switchLabel} />{" "}

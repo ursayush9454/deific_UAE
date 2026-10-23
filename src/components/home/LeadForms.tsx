@@ -4,7 +4,7 @@ import { submitLead } from "@/lib/leads";
 import { COPY_EN, type Copy } from "@/static/copy";
 
 const inputCls =
-  "w-full rounded-xl border border-dd-line bg-white px-4 py-3 text-[15px] text-dd-ink placeholder:text-dd-slate/60 outline-none transition focus:border-dd-navy focus:ring-4 focus:ring-dd-navy/10";
+  "w-full min-w-0 rounded-xl border border-dd-line bg-white px-4 py-3 text-[15px] text-dd-ink placeholder:text-dd-slate/60 outline-none transition focus:border-dd-navy focus:ring-4 focus:ring-dd-navy/10";
 
 function CountryCode({ value, onChange, label = "Country code" }: { value: string; onChange: (v: string) => void; label?: string }) {
   return (
@@ -13,7 +13,7 @@ function CountryCode({ value, onChange, label = "Country code" }: { value: strin
       dir="ltr"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="rounded-xl border border-dd-line bg-white px-2.5 py-3 text-[15px] text-dd-ink outline-none focus:border-dd-navy"
+      className="shrink-0 rounded-xl border border-dd-line bg-white px-2.5 py-3 text-[15px] text-dd-ink outline-none focus:border-dd-navy"
     >
       <option value="+91">🇮🇳 +91</option>
       <option value="+971">🇦🇪 +971</option>
@@ -83,7 +83,7 @@ export function QuickAudit({ defaultCc = "+91", region = "IN", ui = COPY_EN.form
         <button
           type="submit"
           disabled={state === "sending"}
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-dd-red px-5 py-3 text-[15px] font-semibold text-white transition hover:bg-dd-redink disabled:opacity-70"
+          className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-dd-red px-5 py-3 text-[15px] font-semibold text-white transition hover:bg-dd-redink disabled:opacity-70"
         >
           {state === "sending" ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
           {ui.quickButton}

@@ -51,8 +51,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Bricolage Grotesque Variable"', '"Outfit"', "system-ui", "sans-serif"],
-        sans: ['"Outfit"', "system-ui", "sans-serif"],
+        display: ["var(--font-sans)"],
+        sans: ["var(--font-sans)"],
       },
       borderRadius: {
         lg: "var(--radius)",

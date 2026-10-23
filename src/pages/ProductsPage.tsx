@@ -262,7 +262,7 @@ export default function ProductsPage() {
               {visibleProducts.map((product) => (
                 <article key={product.slug} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-dd-line bg-white transition duration-300 hover:-translate-y-1 hover:border-dd-red/40 hover:shadow-[0_20px_50px_rgba(17,26,51,.10)]">
                   <Link to={`/products/${product.slug}`} className="relative block overflow-hidden h-44 bg-dd-paper">
-                    <img src={product.image} alt={product.name} loading="lazy" className="object-cover w-full h-full transition duration-500 group-hover:scale-105" />
+                    <img src={product.image} alt={product.name} loading="lazy" className="object-contain w-full h-full transition duration-500 group-hover:scale-105" />
                     <span className="absolute left-3 top-3 rounded-full border border-white/60 bg-white/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-dd-ink backdrop-blur">{product.tag}</span>
                   </Link>
                   <div className="flex flex-col flex-1 p-5">

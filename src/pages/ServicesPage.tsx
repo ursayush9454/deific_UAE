@@ -353,15 +353,17 @@ function ServicesPage() {
           <p className="mt-2 text-gray-500">
             Welcome to Deific Digital. If you would like more information, please subscribe.
           </p>
-          <form className="mt-6 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+          <form dir="ltr" onSubmit={(e) => e.preventDefault()} className="mt-6 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
             <input
               type="email"
+              inputMode="email"
+              autoComplete="email"
               placeholder="Your Email Address"
-              className="flex-1 rounded-full border border-gray-200 px-5 py-3 text-sm outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+              className="w-full min-w-0 sm:flex-1 rounded-full border border-gray-200 px-5 py-3 text-sm outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
             />
             <button
               type="submit"
-              className="rounded-full bg-gradient-to-r from-red-600 to-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-red-200 transition-all hover:scale-105 hover:shadow-red-300"
+              className="w-full sm:w-auto rounded-full bg-gradient-to-r from-red-600 to-orange-500 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-red-200 transition-all hover:scale-105 hover:shadow-red-300"
             >
               Subscribe
             </button>

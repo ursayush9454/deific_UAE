@@ -667,7 +667,7 @@ export default function AiAgents() {
                   AI agents
                 </div>
 
-                <h1 className="max-w-5xl text-5xl font-semibold leading-[1.03] tracking-[-0.06em] md:text-7xl lg:text-8xl">
+                <h1 className="max-w-5xl text-4xl font-semibold leading-[1.05] tracking-[-0.04em] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
                   AI agents that
                   <br />
                   <span className="text-red-600">do the work</span>
@@ -728,7 +728,7 @@ export default function AiAgents() {
               Not sure which agent fits?
             </span>
 
-            <h2 className="mt-8 text-4xl font-semibold leading-tight tracking-[-0.05em] md:text-7xl">
+            <h2 className="mt-8 text-3xl font-semibold leading-tight tracking-[-0.04em] sm:text-4xl md:text-6xl lg:text-7xl">
               Tell us about your business.
               <br />
               <span className="text-red-600">
