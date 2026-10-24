@@ -1,3 +1,4 @@
+import { Seo, breadcrumbLd } from "@/components/site/Seo";
 import { useEffect, useRef } from "react";
 
 /**
@@ -50,6 +51,13 @@ export default function USALandingPage() {
 
   return (
     <div className="deific-landing">
+      <Seo
+        title="Web Development & Digital Marketing for US Businesses | Deific Digital"
+        description="Deific Digital builds websites, apps and growth marketing for US businesses with an India-based engineering team. ISO 9001 and ISO/IEC 27001 certified."
+        path="/usa"
+        locale="en_US"
+        jsonLd={breadcrumbLd([["Home", "/"], ["USA", "/usa"]])}
+      />
       <style dangerouslySetInnerHTML={{ __html: `
         .deific-landing {
           --bg:#FFFFFF;

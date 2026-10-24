@@ -22,6 +22,7 @@ export function ProductsMegaMenu() {
                 src={p.image}
                 alt={p.name}
                 loading="lazy"
+                decoding="async"
                 className="object-cover w-full h-full transition duration-300 group-hover/card:scale-105"
               />
             </Link>

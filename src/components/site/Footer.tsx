@@ -4,6 +4,7 @@ import logo from "../../assets/dd.webp";
 import { SITE, waLink } from "../../static/siteConfig";
 import { servicesMenu } from "../../static/servicesData";
 import { products, companyLinks } from "../../static/productsData";
+import { useSiteLanguage } from "@/i18n/LanguageContext";
 
 type FooterLink = readonly [string, string];
 type FooterColumn = { title: string; links: FooterLink[] };
@@ -47,6 +48,8 @@ const columns: FooterColumn[] = [
 ];
 
 export function Footer() {
+  const { language, region } = useSiteLanguage();
+  const home = region === "AE" ? (language === "ar" ? "/uae/ar" : "/uae") : region === "US" ? "/usa" : "/";
   const social = [
     { icon: Facebook, href: SITE.social.facebook, label: "Facebook" },
     { icon: Linkedin, href: SITE.social.linkedin, label: "LinkedIn" },
@@ -58,9 +61,9 @@ export function Footer() {
       <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1fr_2.6fr]">
           <div>
-            <Link to="/" className="flex items-center gap-2.5" dir="ltr">
-              <img src={logo} alt="" width={34} height={34} className="h-[34px] w-[34px] rounded-lg" />
-              <span className="font-brand text-[21px] font-semibold">
+            <Link to={home} className="flex items-center gap-2.5" dir="ltr">
+              <img src={logo} alt="Deific Digital logo" data-no-translate loading="lazy" width={34} height={34} className="h-[34px] w-[34px] rounded-lg" />
+              <span data-brand-name className="font-brand text-[21px] font-semibold">
                 Deific <span className="text-[#FF5A60]">Digital</span>
               </span>
             </Link>

@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, Phone, ChevronDown, MessageCircle } from "lucide-react";
 import logo from "../../assets/dd.webp";
@@ -6,6 +6,7 @@ import { servicesMenu } from "../../static/servicesData";
 import { products, companyLinks } from "../../static/productsData";
 import { ProductsMegaMenu } from "./ProductsMegaMenu";
 import { SITE, waLink } from "../../static/siteConfig";
+import { useSiteLanguage } from "@/i18n/LanguageContext";
 
 type MenuKey = "products" | "services" | "about";
 type NavItem = { to: string; label: string; menu?: MenuKey };
@@ -31,16 +32,28 @@ export function Header() {
   const [openMenu, setOpenMenu] = useState<MenuKey | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const path = location.pathname.replace(/\/+$/, "") || "/";
-  const isUAE = path === "/uae" || path.startsWith("/uae/");
-  const isAR = path === "/uae/ar";
-  const home = isAR ? "/uae/ar" : isUAE ? "/uae" : "/";
+  const { language, setLanguage, region: selectedRegion } = useSiteLanguage();
+  const isUAE = selectedRegion === "AE";
+  const isAR = language === "ar";
+  const home = isUAE ? (isAR ? "/uae/ar" : "/uae") : selectedRegion === "US" ? "/usa" : "/";
   const auditHref = home === "/" ? "/contact" : `${home}#audit`;
-  const auditLabel = "Free automation audit"; // header label sab jagah same (India)
+  const auditLabel = "Free automation audit";
   const region = isUAE ? "AE" : "IN";
   const tel = isUAE ? SITE.telAE : SITE.telIN;
   const phone = isUAE ? SITE.phoneAE : SITE.phoneIN;
   const waMsg = isAR ? "مرحبًا Deific Digital، أريد معرفة المزيد عن الأتمتة بالذكاء الاصطناعي." : "Hi Deific Digital, I want to know more about AI automation.";
+
+  const selectLanguage = (nextLanguage: "en" | "ar") => {
+    // The two UAE landing routes contain native regional homepage copy. For
+    // other pages, keep the current route and change the site-wide language.
+    if (path === "/uae" || path === "/uae/ar") {
+      navigate(nextLanguage === "ar" ? "/uae/ar" : "/uae");
+      return;
+    }
+    setLanguage(nextLanguage);
+  };
 
   useEffect(() => {
     setOpen(false);
@@ -63,11 +76,11 @@ export function Header() {
 
   return (
     <>
-      <header ref={headerRef} dir="ltr" className="site-header sticky top-0 z-50 w-full border-b border-dd-line/80 bg-white/90 backdrop-blur-xl">
+      <header ref={headerRef} dir={isAR ? "rtl" : "ltr"} className="site-header sticky top-0 z-50 w-full border-b border-dd-line/80 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex h-[68px] max-w-[1200px] items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
           <Link to={home} className="flex shrink-0 items-center gap-2.5" aria-label="Deific Digital home" dir="ltr">
-            <img src={logo} alt="" width={34} height={34} className="h-[34px] w-[34px] rounded-lg" />
-            <span className="font-brand text-[21px] font-semibold text-dd-ink">
+            <img src={logo} alt="" data-no-translate width={34} height={34} className="h-[34px] w-[34px] rounded-lg" />
+            <span data-brand-name className="font-brand text-[21px] font-semibold text-dd-ink">
               Deific <span className="text-dd-red">Digital</span>
             </span>
           </Link>
@@ -75,6 +88,7 @@ export function Header() {
           {/* desktop nav */}
           <nav aria-label="Main" className="items-center hidden gap-6 xl:flex">
             {nav.map((n) => {
+              const navTarget = n.to === "/" ? home : n.to;
               if (n.menu) {
                 const isOpen = openMenu === n.menu;
                 const showCls = isOpen
@@ -128,9 +142,9 @@ export function Header() {
                 );
               }
               return n.to.includes("#") ? (
-                <Link key={n.label} to={n.to} className={linkCls}>{n.label}</Link>
+                <Link key={n.label} to={navTarget} className={linkCls}>{n.label}</Link>
               ) : (
-                <NavLink key={n.label} to={n.to} className={({ isActive }) => `${linkCls} ${isActive ? "!text-dd-red" : ""}`}>{n.label}</NavLink>
+                <NavLink key={n.label} to={navTarget} className={({ isActive }) => `${linkCls} ${isActive ? "!text-dd-red" : ""}`}>{n.label}</NavLink>
               );
             })}
           </nav>
@@ -146,12 +160,12 @@ export function Header() {
             </div>
             {isUAE ? (
               <div className="flex items-center rounded-full bg-dd-paper p-1 text-[13px] font-semibold ring-1 ring-dd-line" aria-label="Language" dir="ltr">
-                <Link to="/uae" hrefLang="en-AE" lang="en" className={`rounded-full px-2.5 py-1 ${!isAR ? "bg-white text-dd-ink shadow-sm" : "text-dd-slate"}`}>
+                <button type="button" onClick={() => selectLanguage("en")} lang="en" aria-pressed={!isAR} className={`rounded-full px-2.5 py-1 ${!isAR ? "bg-white text-dd-ink shadow-sm" : "text-dd-slate"}`}>
                   EN
-                </Link>
-                <Link to="/uae/ar" hrefLang="ar-AE" lang="ar" className={`rounded-full px-2.5 py-1 ${isAR ? "bg-white text-dd-ink shadow-sm" : "text-dd-slate"}`}>
+                </button>
+                <button type="button" onClick={() => selectLanguage("ar")} lang="ar" aria-pressed={isAR} className={`rounded-full px-2.5 py-1 ${isAR ? "bg-white text-dd-ink shadow-sm" : "text-dd-slate"}`}>
                   عربي
-                </Link>
+                </button>
               </div>
             ) : null}
             <a
@@ -185,8 +199,9 @@ export function Header() {
           <div className="max-h-[calc(100vh-68px)] overflow-y-auto border-t border-dd-line bg-white xl:hidden">
             <nav aria-label="Mobile" className="mx-auto grid max-w-[1200px] gap-1 px-4 py-4">
               {nav.map((n) => {
+                const navTarget = n.to === "/" ? home : n.to;
                 if (!n.menu) {
-                  return <Link key={n.label} to={n.to} className="rounded-lg px-3 py-3 text-[16px] font-medium text-dd-ink hover:bg-dd-paper">{n.label}</Link>;
+                  return <Link key={n.label} to={navTarget} className="rounded-lg px-3 py-3 text-[16px] font-medium text-dd-ink hover:bg-dd-paper">{n.label}</Link>;
                 }
                 const isOpen = openMenu === n.menu;
                 return (
@@ -235,7 +250,7 @@ export function Header() {
               <div className="mt-2 flex flex-wrap gap-2 px-3 text-[14px] font-semibold" dir="ltr">
                 <Link to="/" className={`rounded-full px-3 py-1.5 ring-1 ring-dd-line ${!isUAE ? "bg-dd-navy text-white" : "text-dd-ink"}`}>India</Link>
                 <Link to="/uae" className={`rounded-full px-3 py-1.5 ring-1 ring-dd-line ${isUAE && !isAR ? "bg-dd-navy text-white" : "text-dd-ink"}`}>UAE English</Link>
-                <Link to="/uae/ar" className={`rounded-full px-3 py-1.5 ring-1 ring-dd-line ${isAR ? "bg-dd-navy text-white" : "text-dd-ink"}`}>UAE عربي</Link>
+                <button type="button" onClick={() => { if (path === "/uae" || path === "/uae/ar" || !isUAE) navigate("/uae/ar"); else setLanguage("ar"); }} className={`rounded-full px-3 py-1.5 ring-1 ring-dd-line ${isAR ? "bg-dd-navy text-white" : "text-dd-ink"}`}>UAE عربي</button>
               </div>
               {tel ? (
                 <a href={`tel:${tel}`} className="mt-2 flex items-center gap-2 rounded-lg px-3 py-3 text-[16px] font-semibold text-dd-ink">

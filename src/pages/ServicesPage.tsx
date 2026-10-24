@@ -123,7 +123,10 @@ function ServicesPage() {
             <div className="flex-1 flex justify-center">
   <img
     src={content.heroImage}
-    alt={content.highlight}
+    alt={`${content.title} ${content.highlight}`.trim()}
+    width={384}
+    height={176}
+    decoding="async"
     className="w-64 md:w-80 lg:w-96 h-44 rounded-2xl shadow-2xl object-cover border-2 border-white/20"
   />
 </div>
@@ -246,7 +249,7 @@ function ServicesPage() {
           <div
             className="rounded-3xl border border-red-200 p-8 md:p-12 shadow-md transition-all duration-300 hover:shadow-xl hover:scale-[1.01] relative overflow-hidden"
             style={{
-              backgroundImage: "url('https://picsum.photos/seed/developer/800/300')",
+              backgroundImage: "url('https://picsum.photos/seed/developer/800/300.webp')",
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -353,8 +356,9 @@ function ServicesPage() {
           <p className="mt-2 text-gray-500">
             Welcome to Deific Digital. If you would like more information, please subscribe.
           </p>
-          <form dir="ltr" onSubmit={(e) => e.preventDefault()} className="mt-6 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+          <form onSubmit={(e) => e.preventDefault()} className="mt-6 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
             <input
+              dir="ltr"
               type="email"
               inputMode="email"
               autoComplete="email"

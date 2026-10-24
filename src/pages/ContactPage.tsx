@@ -505,7 +505,6 @@ export default function ContactPage() {
                                     <form
                                         ref={formRef}
                                         onSubmit={handleSubmit}
-                                        dir="ltr"
                                         className="relative z-10 space-y-5 sm:space-y-6"
                                     >
                                         <div>

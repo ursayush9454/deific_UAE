@@ -26,7 +26,7 @@ export function CTABanner() {
               textAlign: "center",
             }}
           >
-            <img src={callgirl} alt="" />
+            <img src={callgirl} alt="" loading="lazy" decoding="async" width={100} height={100} />
           </span>
         </div>
 

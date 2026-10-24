@@ -1,3 +1,4 @@
+import { Seo } from "@/components/site/Seo";
 import { CTABanner } from "@/components/site/CTABanner";
 import cover from "../assets/cover-image.webp";
 import {
@@ -340,6 +341,7 @@ function PrivacyContent() {
 export default function PrivacyPage() {
     return (
         <div className="min-h-screen bg-white">
+            <Seo title="Privacy Policy | Deific Digital" description="How Deific Digital collects, uses and protects your personal data. ISO/IEC 27001 certified information security." path="/privacy-policy" />
             <Breadcrumb />
             <PrivacyContent />
             <CTABanner />

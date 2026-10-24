@@ -1,15 +1,16 @@
+import { Seo, breadcrumbLd } from "@/components/site/Seo";
 import { CTABanner } from "@/components/site/CTABanner";
 import { Linkedin, Twitter } from "lucide-react";
 import atul from "../assets/team-5.webp";
 import mohit from "../assets/team-mohit.webp";
 import cover from "../assets/cover-image.webp";
-import ayush from "../assets/ayush.png";
-import brij from "../assets/brij.png";
-import srtanshu from "../assets/srtanshu.png"
-import mohshin from "../assets/mohshin.png"
-import satvik from "../assets/satvik.png"
-import bhumi from "../assets/bhumi.png"
-import riddhi from "../assets/riddhi.png"
+import ayush from "../assets/ayush.webp";
+import brij from "../assets/brij.webp";
+import srtanshu from "../assets/srtanshu.webp"
+import mohshin from "../assets/mohshin.webp"
+import satvik from "../assets/satvik.webp"
+import bhumi from "../assets/bhumi.webp"
+import riddhi from "../assets/riddhi.webp"
 
 
 const founderName = "Atul Singh";
@@ -71,6 +72,12 @@ const team = [
 export default function TeamPage() {
   return (
     <div>
+      <Seo
+        title="Our Team | Software Engineers & AI Experts | Deific Digital"
+        description="Meet the founders, engineers and AI specialists behind Deific Digital, an ISO-certified software company in Kanpur and Noida, India."
+        path="/team"
+        jsonLd={breadcrumbLd([["Home", "/"], ["Team", "/team"]])}
+      />
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden text-center bg-gradient-to-br from-white via-gray-50 to-red-50/30">
         <div className="absolute inset-0 pointer-events-none">
@@ -102,7 +109,11 @@ export default function TeamPage() {
               <div className="relative overflow-hidden h-72">
                 <img
                   src={m.photo}
-                  alt={m.name}
+                  alt={`${m.name}, ${m.role} at Deific Digital`}
+                  loading="lazy"
+                  decoding="async"
+                  width={400}
+                  height={288}
                   className="object-contain object-top w-full h-full transition-transform duration-500 group-hover:scale-105"
                 />
                 {/* Gradient overlay on hover */}

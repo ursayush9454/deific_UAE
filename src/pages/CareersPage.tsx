@@ -416,8 +416,12 @@ export default function CareersPage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
                         <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent z-10" />
                         <img
-                            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80"
+                            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80&fm=webp"
                             alt="Team collaboration at Deific Digital"
+                            loading="lazy"
+                            decoding="async"
+                            width={1400}
+                            height={420}
                             className="w-full h-[320px] md:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                         <div className="absolute bottom-0 left-0 right-0 z-20 p-6 md:p-10">

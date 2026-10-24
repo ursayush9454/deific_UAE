@@ -1,3 +1,4 @@
+import { Seo } from "@/components/site/Seo";
 import { CTABanner } from "@/components/site/CTABanner";
 import cover from "../assets/cover-image.webp";
 import { Shield, FileText, Users, Clock, Scale, AlertTriangle, CheckCircle, GlobeLock } from "lucide-react";
@@ -233,6 +234,7 @@ function TermsContent() {
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-white">
+      <Seo title="Terms & Conditions | Deific Digital" description="Terms and conditions for using Deific Digital's website, software development and AI automation services." path="/terms-and-condition" />
       <Breadcrumb />
       <TermsContent />
       <CTABanner />

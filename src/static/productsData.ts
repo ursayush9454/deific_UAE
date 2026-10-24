@@ -1,7 +1,7 @@
-import receptionistImg from "../assets/medcare.png";
-import propAiImg from "../assets/propai.png";
-import salesAgentImg from "../assets/salesagent.png";
-import supportImg from "../assets/customer.png";
+import receptionistImg from "../assets/medcare.webp";
+import propAiImg from "../assets/propai.webp";
+import salesAgentImg from "../assets/salesagent.webp";
+import supportImg from "../assets/customer.webp";
 
 export type Product = {
   slug: string;

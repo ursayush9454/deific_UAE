@@ -10,6 +10,9 @@ import USA from "@/pages/USA";
 import DigitalAgencyBlog from "@/Posts/DigitalAgency";
 import TopItCompaniesBlog from "@/Posts/TopItCompanies";
 import AiAgents from "@/pages/AiAgent";
+import { CITIES, cityPath, INDIA_HUB_PATH } from "@/static/cities";
+import { LanguageProvider } from "@/i18n/LanguageContext";
+import ArabicAutoTranslate from "@/i18n/ArabicAutoTranslate";
 
 // 👇 Sab pages ab lazy — direct import hata diya
 const HomePage = lazy(() => import("@/pages/HomePage"));
@@ -27,6 +30,8 @@ const TermsAndCondition = lazy(() => import("@/pages/TermsAndCondition"));
 const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 const ProductsPage = lazy(() => import("@/pages/ProductsPage"));
 const ProductDetailPage = lazy(() => import("@/pages/ProductDetailPage"));
+const CityPage = lazy(() => import("@/pages/CityPage"));
+const IndiaHubPage = lazy(() => import("@/pages/IndiaHubPage"));
 const PropAILanding = lazy(() => import("@/pages/PropAI"));
 
 const PropAIPrivacy = lazy(() => import("@/pages/PropAIPrivacy"));
@@ -49,7 +54,8 @@ function Layout({ children }: { children: React.ReactNode }) {
 /** Routes without a router, so the same tree can be rendered on the server (prerender) and in the browser. */
 export function AppRoutes() {
   return (
-    <>
+    <LanguageProvider>
+      <ArabicAutoTranslate />
       <ScrollToTop />
       <Suspense fallback={<div className="min-h-screen" />}>
         <Routes>
@@ -217,6 +223,27 @@ export function AppRoutes() {
             }
           />
 
+          {/* India SEO: hub + one landing page per city (/software-company-in-<city>) */}
+          <Route
+            path={INDIA_HUB_PATH}
+            element={
+              <Layout>
+                <IndiaHubPage />
+              </Layout>
+            }
+          />
+          {CITIES.map((c) => (
+            <Route
+              key={c.slug}
+              path={cityPath(c.slug)}
+              element={
+                <Layout>
+                  <CityPage slug={c.slug} />
+                </Layout>
+              }
+            />
+          ))}
+
           <Route path="/propai" element={<PropAILanding />} />
 
           <Route path="/propai/privacy-policy" element={<PropAIPrivacy />} />
@@ -241,7 +268,7 @@ export function AppRoutes() {
           />
         </Routes>
       </Suspense>
-    </>
+    </LanguageProvider>
   );
 }
 

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { Seo, breadcrumbLd } from "@/components/site/Seo";
+import { useState } from "react";
 import type { ComponentType } from "react";
 import {
   ArrowRight,
@@ -835,16 +836,15 @@ function Footer() {
 }
 
 export default function PropAILanding() {
-  useEffect(() => {
-    const prev = document.title;
-    document.title = `${APP_NAME} CRM – Every lead answered, even while you're on-site`;
-    return () => {
-      document.title = prev;
-    };
-  }, []);
 
   return (
     <div className="propai">
+      <Seo
+        title={`${APP_NAME} CRM for Real Estate | Every Lead Answered | Deific Digital`}
+        description="PropAI is a real estate CRM with an AI sales agent that replies to every lead on WhatsApp in seconds, books site visits and follows up automatically."
+        path="/propai"
+        jsonLd={breadcrumbLd([["Home", "/"], ["PropAI", "/propai"]])}
+      />
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <Navbar />
       <main>

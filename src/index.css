@@ -207,7 +207,11 @@ h1, h2, h3 { text-wrap: balance; }
 }
 
 /* ── Arabic (right-to-left): Plus Jakarta Sans pehle (numbers / English words), phir IBM Plex Sans Arabic ── */
-html[dir="rtl"] body { font-family: "Plus Jakarta Sans", var(--font-arabic); }
+html[dir="rtl"] body {
+  direction: rtl;
+  text-align: start;
+  font-family: "Plus Jakarta Sans", var(--font-arabic);
+}
 html[dir="rtl"] .font-display {
   font-family: "Plus Jakarta Sans", var(--font-arabic);
   letter-spacing: 0;
@@ -217,9 +221,33 @@ html[dir="rtl"] h1.font-display { line-height: 1.4 !important; }
 
 .font-brand { font-family: var(--font-sans); letter-spacing: -0.02em; }
 
-/* ── Header: India wala hi header har page / language (India, UAE EN, UAE عربي, USA) par ──
-   Arabic mode mein bhi header mirror nahi hota, font aur line-height same rehte hain. */
-.site-header { direction: ltr; text-align: left; line-height: 1.5; font-family: var(--font-sans); }
+/* Shared header styling across region and language versions. */
+.site-header { direction: inherit; text-align: start; line-height: 1.5; font-family: var(--font-sans); }
+
+/* A single Arabic-mode rule set applies to every route, including lazy pages,
+   forms, mega-menus, the footer and widgets—not just the UAE homepage. */
+html[dir="rtl"] .site-header { direction: rtl; text-align: right; }
+html[dir="rtl"] .site-header [dir="ltr"],
+html[dir="rtl"] footer [dir="ltr"] { direction: ltr; unicode-bidi: isolate; }
+html[dir="rtl"] .site-header .absolute.left-0 { left: auto; right: 0; }
+html[dir="rtl"] .site-header .border-l { border-left-width: 0; border-right-width: 1px; }
+html[dir="rtl"] main { text-align: start; }
+html[dir="rtl"] footer { text-align: start; }
+html[dir="rtl"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+html[dir="rtl"] textarea,
+html[dir="rtl"] select { text-align: start; }
+html[dir="rtl"] input[type="email"],
+html[dir="rtl"] input[type="tel"],
+html[dir="rtl"] select[dir="ltr"] { direction: ltr; text-align: left; unicode-bidi: isolate; }
+html[dir="rtl"] .text-left { text-align: right !important; }
+html[dir="rtl"] .text-right { text-align: left !important; }
+html[dir="rtl"] #dg-window { direction: rtl; text-align: right; }
+html[dir="rtl"] #dg-input { unicode-bidi: plaintext; text-align: start; }
+
+/* Keep the brand wordmark and typed identifiers visually stable in RTL mode. */
+html[dir="rtl"] .font-brand,
+html[dir="rtl"] [data-brand-name],
+html[dir="rtl"] bdi[dir="ltr"] { unicode-bidi: isolate; }
 
 /* ── Mobile forms ──
    iOS Safari 16px se chhote field par zoom kar deta hai aur layout hil jata hai. */

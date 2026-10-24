@@ -1,3 +1,4 @@
+import { Seo, breadcrumbLd } from "@/components/site/Seo";
 import { CTABanner } from "@/components/site/CTABanner";
 import { SectionHeading } from "@/components/site/SectionHeading";
 
@@ -13,6 +14,12 @@ const techs = [
 export default function TechnologiesPage() {
   return (
     <div>
+      <Seo
+        title="Technologies We Use | React, Node, Flutter, AI | Deific Digital"
+        description="The tech stack behind our software, mobile apps and AI agents: web, mobile, cloud and AI technologies used by Deific Digital engineers."
+        path="/technologies"
+        jsonLd={breadcrumbLd([["Home", "/"], ["Technologies", "/technologies"]])}
+      />
       <section className="bg-gradient-to-br from-gray-50 to-white py-16 text-center">
         <div className="mx-auto max-w-3xl px-4">
           <span className="inline-block rounded-full border border-red-200 bg-red-50 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-red-700 mb-4">

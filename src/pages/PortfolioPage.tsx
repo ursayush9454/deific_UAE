@@ -25,7 +25,7 @@ const clients = [
   {
     name: "Uttar Pradesh Tourism Department",
     industry: "Tourism",
-    img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "Kanpur Smart City",
@@ -35,47 +35,47 @@ const clients = [
   {
     name: "Nagar Nigam Bareilly",
     industry: "Government",
-    img: "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "Nagar Panchayat Pukhrayan",
     industry: "Government",
-    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "UPMRC Kanpur",
     industry: "Transport",
-    img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "UPDESCO",
     industry: "Electronics",
-    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "UPSIDC",
     industry: "Industrial",
-    img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "AGRAWAL HOMES Pvt Ltd",
     industry: "Real Estate",
-    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "Sandbox Pvt Ltd",
     industry: "Technology",
-    img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "T&T GROUP",
     industry: "Real Estate",
-    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "BHUTANI GROUP",
     industry: "Real Estate",
-    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "The Perch Multicusin Restaurant",
@@ -95,17 +95,17 @@ const clients = [
   {
     name: "CA PRAVEEN JINDAL",
     industry: "Finance",
-    img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "AMARPRABHA SAMAJIK SANSTHAN",
     industry: "Non-Profit",
-    img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   // {
   //   name: "DROOM",
   //   industry: "Drone Tech",
-  //   img: "https://images.unsplash.com/photo-1508614589041-895b88991b3e?w=100&h=100&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1508614589041-895b88991b3e?w=100&h=100&fit=crop&crop=center&fm=webp",
   // },
   {
     name: "A4 CELEBRATION",
@@ -115,32 +115,32 @@ const clients = [
   // {
   //   name: "SARVAJAN INSTITUTE OF EDUCATION & EMPLOYMENT",
   //   industry: "Education",
-  //   img: "https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=100&h=100&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=100&h=100&fit=crop&crop=center&fm=webp",
   // },
   {
     name: "COMPARE BRICKS",
     industry: "Construction",
-    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "VAIDIC PARAMPARA",
     industry: "Wellness",
-    img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "Smart Dukaan",
     industry: "E-commerce",
-    img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "IIPR",
     industry: "Legal/IP",
-    img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
   {
     name: "HBTU",
     industry: "Education",
-    img: "https://images.unsplash.com/photo-1562774053-701939374585?w=100&h=100&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1562774053-701939374585?w=100&h=100&fit=crop&crop=center&fm=webp",
   },
 ];
 
@@ -181,7 +181,7 @@ const projects = [
   //   tech: "React, Django, PostgreSQL",
   //   desc: "Municipal management system for Bareilly – taxation, licenses, and public works.",
   //   color: "from-indigo-500 to-purple-700",
-  //   img: "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "Government",
   // },
   // {
@@ -190,7 +190,7 @@ const projects = [
   //   tech: "React, Firebase",
   //   desc: "Rural governance platform – panchayat records, schemes, and citizen engagement.",
   //   color: "from-teal-500 to-emerald-600",
-  //   img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "Government",
   // },
   // {
@@ -208,7 +208,7 @@ const projects = [
   //   tech: "React, Node.js, AWS",
   //   desc: "Electronics development portal – e‑governance, tenders, and industry collaboration.",
   //   color: "from-purple-500 to-violet-700",
-  //   img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "Government",
   // },
   // {
@@ -217,7 +217,7 @@ const projects = [
   //   tech: "Next.js, PostgreSQL, Mapbox",
   //   desc: "Industrial infrastructure management – land allocation, utilities, and investor dashboard.",
   //   color: "from-yellow-500 to-orange-600",
-  //   img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "Government",
   // },
   // {
@@ -226,7 +226,7 @@ const projects = [
   //   tech: "React, CMS, Stripe",
   //   desc: "Luxury property listing platform – project showcases, virtual tours, and online booking.",
   //   color: "from-green-500 to-emerald-700",
-  //   img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "Real Estate",
   // },
   // {
@@ -235,7 +235,7 @@ const projects = [
   //   tech: "React, Django, Docker",
   //   desc: "Innovation sandbox for startups – collaboration tools, resource sharing, and mentorship.",
   //   color: "from-gray-500 to-slate-700",
-  //   img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "EdTech",
   // },
   // {
@@ -244,7 +244,7 @@ const projects = [
   //   tech: "Next.js, GraphQL, MongoDB",
   //   desc: "End‑to‑end real estate CRM – property inventory, client management, and analytics.",
   //   color: "from-amber-500 to-yellow-600",
-  //   img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "Real Estate",
   // },
   // {
@@ -253,7 +253,7 @@ const projects = [
   //   tech: "React, Node.js, PostgreSQL",
   //   desc: "Construction project management – budgeting, scheduling, and contractor coordination.",
   //   color: "from-lime-500 to-green-600",
-  //   img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "Real Estate",
   // },
   // {
@@ -289,7 +289,7 @@ const projects = [
   //   tech: "React, Django, PostgreSQL",
   //   desc: "Financial advisory portal – tax planning, investment tracking, and client dashboards.",
   //   color: "from-emerald-500 to-teal-600",
-  //   img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "EdTech",
   // },
   // {
@@ -298,7 +298,7 @@ const projects = [
   //   tech: "React, Firebase, Maps",
   //   desc: "Social impact platform – donor management, project tracking, and volunteer coordination.",
   //   color: "from-violet-500 to-purple-600",
-  //   img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "Government",
   // },
   // {
@@ -307,7 +307,7 @@ const projects = [
   //   tech: "React, Node.js, WebRTC",
   //   desc: "Drone fleet management – real‑time telemetry, mission planning, and analytics.",
   //   color: "from-sky-500 to-cyan-600",
-  //   img: "https://images.unsplash.com/photo-1508614589041-895b88991b3e?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1508614589041-895b88991b3e?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "Transport",
   // },
   {
@@ -334,7 +334,7 @@ const projects = [
     tech: "React, Django, PostgreSQL",
     desc: "Construction material comparison platform – pricing, quality, and supplier ratings.",
     color: "from-stone-500 to-gray-700",
-    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop&crop=center&fm=webp",
     tag: "Real Estate",
   },
   {
@@ -343,7 +343,7 @@ const projects = [
     tech: "React, Node.js, MongoDB",
     desc: "Ayurvedic wellness platform – consultation booking, product sales, and health records.",
     color: "from-rose-500 to-red-600",
-    img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop&crop=center&fm=webp",
     tag: "Healthcare",
   },
   {
@@ -352,7 +352,7 @@ const projects = [
     tech: "Next.js, Stripe, Firebase",
     desc: "Multi‑vendor e‑commerce platform – inventory, order management, and payment gateway.",
     color: "from-orange-500 to-red-600",
-    img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&crop=center",
+    img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&crop=center&fm=webp",
     tag: "Events",
   },
   // {
@@ -361,7 +361,7 @@ const projects = [
   //   tech: "React, Django, PostgreSQL",
   //   desc: "Intellectual property management – patent filing, trademark tracking, and legal analytics.",
   //   color: "from-blue-500 to-indigo-600",
-  //   img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "Government",
   // },
   // {
@@ -370,7 +370,7 @@ const projects = [
   //   tech: "React Native, Node.js, MongoDB",
   //   desc: "University campus app – academic calendar, attendance, results, and student services.",
   //   color: "from-indigo-500 to-blue-700",
-  //   img: "https://images.unsplash.com/photo-1562774053-701939374585?w=600&h=400&fit=crop&crop=center",
+  //   img: "https://images.unsplash.com/photo-1562774053-701939374585?w=600&h=400&fit=crop&crop=center&fm=webp",
   //   tag: "EdTech",
   // },
 ];

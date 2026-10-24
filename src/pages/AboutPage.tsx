@@ -183,7 +183,7 @@
 //                 <div className="relative flex justify-center">
 //                     <div className="w-full max-w-md overflow-hidden shadow-2xl aspect-square rounded-2xl ring-1 ring-gray-200">
 //                         <img
-//                             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+//                             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&fm=webp"
 //                             alt="Team"
 //                             className="object-cover w-full h-full"
 //                         />
@@ -567,13 +567,13 @@ import { Helmet } from 'react-helmet-async';
 import atul from "../assets/team-5.webp";
 import mohit from "../assets/team-mohit.webp";
 import cover from "../assets/cover-image.webp";
-import ayush from "../assets/ayush.png";
-import brij from "../assets/brij.png";
-import srtanshu from "../assets/srtanshu.png"
-import mohshin from "../assets/mohshin.png"
-import satvik from "../assets/satvik.png"
-import bhumi from "../assets/bhumi.png"
-import riddhi from "../assets/riddhi.png"
+import ayush from "../assets/ayush.webp";
+import brij from "../assets/brij.webp";
+import srtanshu from "../assets/srtanshu.webp"
+import mohshin from "../assets/mohshin.webp"
+import satvik from "../assets/satvik.webp"
+import bhumi from "../assets/bhumi.webp"
+import riddhi from "../assets/riddhi.webp"
 import { useState, useEffect, useRef } from "react";
 import { Sparkles, Quote, Users, Award, Globe, Briefcase, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -767,8 +767,12 @@ function HeroSection() {
                 <div className="relative flex justify-center">
                     <div className="w-full max-w-md overflow-hidden shadow-2xl aspect-square rounded-2xl ring-1 ring-gray-200">
                         <img
-                            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
-                            alt="Team"
+                            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&fm=webp"
+                            alt="Deific Digital team collaborating in the office"
+                            loading="lazy"
+                            decoding="async"
+                            width={800}
+                            height={800}
                             className="object-cover w-full h-full"
                         />
                     </div>
@@ -788,7 +792,10 @@ function FounderAvatar() {
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl ring-2 ring-white">
                 <img
                     src={atul}
-                    alt="Atul Singh"
+                    alt="Atul Singh, Founder of Deific Digital"
+                    width={384}
+                    height={480}
+                    decoding="async"
                     className="object-cover w-full h-full"
                     style={{ objectPosition: "center 20%" }}
                 />
@@ -1037,7 +1044,11 @@ function TeamGrid() {
                                         <div className="overflow-hidden transition-all duration-300 rounded-full w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 ring-4 ring-red-100 group-hover:ring-red-500 ring-offset-2">
                                             <img
                                                 src={member.photo}
-                                                alt={member.name}
+                                                alt={`${member.name}, Deific Digital team member`}
+                                                loading="lazy"
+                                                decoding="async"
+                                                width={144}
+                                                height={144}
                                                 className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
                                             />
                                         </div>

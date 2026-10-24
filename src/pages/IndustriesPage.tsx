@@ -1,3 +1,4 @@
+import { Seo, breadcrumbLd } from "@/components/site/Seo";
 import { CTABanner } from "@/components/site/CTABanner";
 import { SectionHeading } from "@/components/site/SectionHeading";
 
@@ -15,6 +16,12 @@ const industries = [
 export default function IndustriesPage() {
   return (
     <div>
+      <Seo
+        title="Industries We Serve | Healthcare, Fintech, Real Estate | Deific Digital"
+        description="Software, mobile apps and AI automation for healthcare, fintech, e-commerce, education, manufacturing, hospitality, logistics and real estate businesses in India."
+        path="/industries"
+        jsonLd={breadcrumbLd([["Home", "/"], ["Industries", "/industries"]])}
+      />
       <section className="bg-gradient-to-br from-gray-50 to-white py-16 text-center">
         <div className="mx-auto max-w-3xl px-4">
           <span className="inline-block rounded-full border border-red-200 bg-red-50 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-red-700 mb-4">

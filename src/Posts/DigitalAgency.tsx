@@ -1,6 +1,28 @@
+import { Seo, breadcrumbLd } from "@/components/site/Seo";
 function DigitalAgencyBlog() {
   return (
     <article className="max-w-3xl mx-auto px-4 py-12 text-gray-800">
+      <Seo
+        title="How to Choose the Right Digital Agency in 2026 | Deific Digital"
+        description="A practical guide to choosing a digital agency in 2026: software development, UX, SEO, PPC and web design. What to ask, what to check and red flags to avoid."
+        path="/blog/how-to-choose-the-right-digital-agency"
+        type="article"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: "How to Choose the Right Digital Agency in 2026",
+            description: "A practical guide to choosing a digital agency in 2026: software development, UX, SEO, PPC and web design. What to ask, what to check and red flags to avoid.",
+            mainEntityOfPage: "https://deificdigital.com/blog/how-to-choose-the-right-digital-agency",
+            image: "https://deificdigital.com/og-image.jpg",
+            datePublished: "2026-10-17",
+            dateModified: "2026-10-24",
+            author: { "@type": "Organization", name: "Deific Digital", url: "https://deificdigital.com" },
+            publisher: { "@id": "https://deificdigital.com/#organization" },
+          },
+          breadcrumbLd([["Home", "/"], ["Blog", "/blog"], ["How to Choose the Right Digital Agency in 2026", "/blog/how-to-choose-the-right-digital-agency"]]),
+        ]}
+      />
       <h1 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
         How to Choose the Right Digital Agency in 2026: Software Development,
         UX, SEO, PPC & Web Design
