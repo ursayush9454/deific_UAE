@@ -131,14 +131,15 @@ export default function ContactPage() {
         if (!formData.message.trim())
             newErrors.message = "Message is required";
 
-        // Captcha check
-        // if (!captchaAnswer.trim()) {
-        //     newErrors.captcha = "Please solve the captcha";
-        // } else if (
-        //     parseInt(captchaAnswer, 10) !== captcha.num1 + captcha.num2
-        // ) {
-        //     newErrors.captcha = "Incorrect answer, please try again";
-        // }
+        // CAPTCHA check: block submission unless the answer is correct.
+        if (!captchaAnswer.trim()) {
+            newErrors.captcha = "Please solve the captcha";
+        } else if (
+            !/^\d+$/.test(captchaAnswer.trim()) ||
+            Number(captchaAnswer.trim()) !== captcha.num1 + captcha.num2
+        ) {
+            newErrors.captcha = "Incorrect answer. Please try again";
+        }
 
         return newErrors;
     };
@@ -159,6 +160,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         allTouched[key] = true;
     });
     setTouched(allTouched);
+    setCaptchaTouched(true);
 
     const newErrors = validateForm();
     setErrors(newErrors);
@@ -513,7 +515,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                                                 Send a Message
                                             </h3>
                                             <p className="mt-1 text-sm text-gray-500">
-                                                Fill in the details, then select Send Message. Your default email app will open with your enquiry filled in. Press Send in that app to email us.
+                                                Fill in the details and solve the security check. Your email composer will open with the enquiry filled in; press Send there to email us.
                                             </p>
                                         </div>
 
@@ -743,16 +745,22 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                                             </div>
                                         </div>
 
-                                        {/* Captcha */}
-                                        {/* <div className="p-4 border border-gray-200 rounded-xl bg-gray-50/50">
+                                        {/* CAPTCHA / anti-spam check */}
+                                        <div className="p-4 border border-gray-200 rounded-xl bg-gray-50/70">
                                             <div className="flex items-center gap-2 mb-3">
                                                 <ShieldCheck className="w-4 h-4 text-red-500" />
                                                 <span className="text-xs font-semibold tracking-wider text-gray-500 uppercase">
                                                     Security Check
                                                 </span>
                                             </div>
+                                            <p className="mb-3 text-sm text-gray-600">
+                                                Please solve this quick math question to verify your submission.
+                                            </p>
                                             <div className="flex flex-wrap items-center gap-3">
-                                                <div className="flex items-center gap-2 rounded-lg bg-white border border-gray-200 px-4 py-2.5 select-none">
+                                                <div
+                                                    className="flex items-center gap-2 rounded-lg bg-white border border-gray-200 px-4 py-2.5 select-none"
+                                                    aria-label={`What is ${captcha.num1} plus ${captcha.num2}?`}
+                                                >
                                                     <span className="text-base font-bold tracking-wider text-gray-800">
                                                         {captcha.num1} + {captcha.num2} =
                                                     </span>
@@ -760,16 +768,19 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                                                 <input
                                                     type="text"
                                                     inputMode="numeric"
+                                                    pattern="[0-9]*"
+                                                    maxLength={2}
+                                                    autoComplete="off"
                                                     name="captcha"
+                                                    aria-label="Captcha answer"
+                                                    aria-invalid={Boolean(errors.captcha && captchaTouched)}
+                                                    aria-describedby={errors.captcha && captchaTouched ? "captcha-error" : undefined}
                                                     value={captchaAnswer}
                                                     onChange={handleCaptchaChange}
-                                                    onBlur={() =>
-                                                        setCaptchaTouched(true)
-                                                    }
-                                                    placeholder="?"
-                                                    className={`w-24 rounded-lg border ${
-                                                        errors.captcha &&
-                                                        captchaTouched
+                                                    onBlur={() => setCaptchaTouched(true)}
+                                                    placeholder="Answer"
+                                                    className={`w-28 rounded-lg border ${
+                                                        errors.captcha && captchaTouched
                                                             ? "border-red-500 ring-2 ring-red-500/20"
                                                             : "border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
                                                     } bg-white px-3 py-2.5 text-sm text-center outline-none transition-all`}
@@ -777,21 +788,20 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                                                 <button
                                                     type="button"
                                                     onClick={refreshCaptcha}
-                                                    className="flex items-center justify-center w-10 h-10 text-gray-500 transition-all bg-white border border-gray-200 rounded-lg hover:text-red-600 hover:border-red-200"
-                                                    aria-label="Refresh captcha"
+                                                    className="flex items-center justify-center w-10 h-10 text-gray-500 transition-all bg-white border border-gray-200 rounded-lg hover:text-red-600 hover:border-red-200 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                                                    aria-label="Get a new CAPTCHA question"
                                                     title="Get a new question"
                                                 >
                                                     <RefreshCw className="w-4 h-4" />
                                                 </button>
                                             </div>
-                                            {errors.captcha &&
-                                                captchaTouched && (
-                                                    <p className="flex items-center gap-1 mt-2 text-xs text-red-500 animate-slide-down">
-                                                        <AlertCircle className="w-3 h-3" />
-                                                        {errors.captcha}
-                                                    </p>
-                                                )}
-                                        </div> */}
+                                            {errors.captcha && captchaTouched && (
+                                                <p id="captcha-error" role="alert" className="flex items-center gap-1 mt-2 text-xs text-red-500 animate-slide-down">
+                                                    <AlertCircle className="w-3 h-3" />
+                                                    {errors.captcha}
+                                                </p>
+                                            )}
+                                        </div>
 
                                         {/* Opens the user's email app with the enquiry pre-filled. */}
                                         <button
@@ -799,7 +809,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                                             className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-red-600 to-orange-500 px-6 py-4 text-base font-bold text-white shadow-lg shadow-red-500/25 transition-all hover:scale-[1.02] hover:shadow-red-500/40"
                                         >
                                             <span className="relative flex items-center justify-center gap-2">
-                                                Open Email to Send
+                                                Verify & Open Email
                                                 <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                                             </span>
                                         </button>
