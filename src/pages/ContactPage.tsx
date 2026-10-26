@@ -31,7 +31,6 @@ import {
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -151,62 +150,63 @@ export default function ContactPage() {
    
    
    
-    const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  console.log("Handle Submit Called");
+    const allTouched: Record<string, boolean> = {};
+    Object.keys(formData).forEach((key) => {
+        allTouched[key] = true;
+    });
+    setTouched(allTouched);
 
-  const allTouched: Record<string, boolean> = {};
-  Object.keys(formData).forEach((key) => {
-    allTouched[key] = true;
-  });
-
-  setTouched(allTouched);
-
-  const newErrors = validateForm();
-
-  if (Object.keys(newErrors).length > 0) {
+    const newErrors = validateForm();
     setErrors(newErrors);
-    return;
-  }
 
-  try {
-    setLoading(true);
+    if (Object.keys(newErrors).length > 0) {
+        const firstError = Object.keys(newErrors)[0];
+        const field = formRef.current?.querySelector<HTMLElement>(
+            `[name="${firstError}"]`
+        );
 
-    const response = await fetch(
-      ((import.meta as any).env?.VITE_LEAD_ENDPOINT || "/api/inquiries"),
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || "Something went wrong");
+        field?.focus();
+        field?.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+        });
+        return;
     }
 
-    setSubmitted(true);
+    const recipient = "deific.solution@hotmail.com";
+    const fullName = [
+        formData.firstName.trim(),
+        formData.lastName.trim(),
+    ].filter(Boolean).join(" ");
 
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-    });
+    const subject = `Website enquiry from ${fullName}`;
 
-  } catch (err: any) {
-    alert(err.message);
-  } finally {
-    setLoading(false);
-  }
+    const body = [
+        "New contact enquiry - Deific Digital",
+        "",
+        `Name: ${fullName}`,
+        `Email: ${formData.email.trim()}`,
+        `Phone: ${formData.phone.trim()}`,
+        `Service: ${formData.service.trim() || "Not specified"}`,
+        "",
+        "Message:",
+        formData.message.trim(),
+    ].join("\n");
+
+    const gmailUrl =
+        "https://mail.google.com/mail/?view=cm&fs=1" +
+        `&to=${encodeURIComponent(recipient)}` +
+        `&su=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(body)}`;
+
+    // Open Gmail directly instead of using the system mailto handler.
+    window.location.assign(gmailUrl);
 };
+
 
     // const handleSubmit = (e: React.FormEvent) => {
     //     e.preventDefault();
@@ -382,12 +382,12 @@ export default function ContactPage() {
                 className="py-16 md:py-24 bg-gray-50/50"
                 id="contact-form"
             >
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="grid gap-12 lg:grid-cols-5">
                         {/* ─── LEFT: CONTACT CARDS ─── */}
                         <div className="lg:col-span-2 animate-on-scroll">
                             <div className="sticky top-24">
-                                <span className="inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-red-700 mb-4">
+                                <span className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-red-700 uppercase bg-red-100 rounded-full">
                                     Contact Information
                                 </span>
                                 <h2 className="text-3xl font-bold text-gray-900">
@@ -420,11 +420,11 @@ export default function ContactPage() {
                                                         : "bg-gradient-to-br from-red-50 to-orange-50 text-red-600 group-hover:from-red-600 group-hover:to-orange-500 group-hover:text-white"
                                                 } transition-all duration-300 group-hover:scale-110`}
                                             >
-                                                <item.icon className="h-6 w-6" />
+                                                <item.icon className="w-6 h-6" />
                                             </div>
 
                                             <div className="flex-1 min-w-0">
-                                                <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                                                <p className="text-xs font-semibold tracking-wider text-gray-400 uppercase">
                                                     {item.label}
                                                 </p>
                                                 <p
@@ -441,14 +441,14 @@ export default function ContactPage() {
                                                 </p>
                                                 {item.highlight && (
                                                     <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-700">
-                                                        <Phone className="h-3 w-3" />
+                                                        <Phone className="w-3 h-3" />
                                                         Available Now
                                                     </span>
                                                 )}
                                             </div>
 
-                                            <div className="shrink-0 self-center text-gray-300 transition-all group-hover:text-red-500 group-hover:translate-x-1">
-                                                <ArrowRight className="h-5 w-5" />
+                                            <div className="self-center text-gray-300 transition-all shrink-0 group-hover:text-red-500 group-hover:translate-x-1">
+                                                <ArrowRight className="w-5 h-5" />
                                             </div>
                                         </a>
                                     ))}
@@ -456,7 +456,7 @@ export default function ContactPage() {
 
                                 {/* Social Links */}
                                 <div className="mt-10">
-                                    <p className="text-sm font-medium text-gray-700 mb-3">
+                                    <p className="mb-3 text-sm font-medium text-gray-700">
                                         Connect with us
                                     </p>
                                     <div className="flex gap-3">
@@ -464,7 +464,7 @@ export default function ContactPage() {
                                             <a
                                                 key={social.label}
                                                 href={social.href}
-                                                className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-gray-600 shadow-sm transition-all hover:bg-red-600 hover:text-white hover:shadow-lg hover:shadow-red-500/25 hover:-translate-y-1 border border-gray-100"
+                                                className="flex items-center justify-center text-gray-600 transition-all bg-white border border-gray-100 rounded-full shadow-sm h-11 w-11 hover:bg-red-600 hover:text-white hover:shadow-lg hover:shadow-red-500/25 hover:-translate-y-1"
                                                 aria-label={social.label}
                                             >
                                                 <social.icon className="h-4.5 w-4.5" />
@@ -477,28 +477,29 @@ export default function ContactPage() {
 
                         {/* ─── RIGHT: FORM ─── */}
                         <div className="lg:col-span-3 animate-on-scroll">
-                            <div className="rounded-3xl bg-white p-6 shadow-xl shadow-gray-200/50 border border-gray-100 sm:p-8 md:p-10 relative overflow-hidden transition-all hover:shadow-2xl hover:shadow-red-100/30">
-                                <div className="absolute -top-20 -right-20 w-64 h-64 bg-red-100/30 rounded-full blur-3xl pointer-events-none animate-pulse" />
-                                <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-blue-100/20 rounded-full blur-3xl pointer-events-none animate-pulse delay-1000" />
+                            <div className="relative p-6 overflow-hidden transition-all bg-white border border-gray-100 shadow-xl rounded-3xl shadow-gray-200/50 sm:p-8 md:p-10 hover:shadow-2xl hover:shadow-red-100/30">
+                                <div className="absolute w-64 h-64 rounded-full pointer-events-none -top-20 -right-20 bg-red-100/30 blur-3xl animate-pulse" />
+                                <div className="absolute w-64 h-64 delay-1000 rounded-full pointer-events-none -bottom-20 -left-20 bg-blue-100/20 blur-3xl animate-pulse" />
 
                                 {submitted ? (
                                     <div className="relative z-10 py-12 text-center animate-fade-in-up">
-                                        <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-green-100 animate-bounce">
-                                            <CheckCircle className="h-12 w-12 text-green-600" />
+                                        <div className="flex items-center justify-center w-24 h-24 mx-auto mb-6 bg-green-100 rounded-full animate-bounce">
+                                            <CheckCircle className="w-12 h-12 text-green-600" />
                                         </div>
                                         <h3 className="text-3xl font-bold text-gray-900">
-                                            Message Sent Successfully! 🎉
+                                            Message Submitted Successfully! ✉️
                                         </h3>
-                                        <p className="mt-3 text-gray-500 max-w-sm mx-auto">
-                                            Thank you for reaching out. We'll
-                                            get back to you within 24 hours.
+                                        <p className="max-w-sm mx-auto mt-3 text-gray-500">
+                                            Thanks for contacting Deific Digital. Your enquiry has been
+                                            submitted for delivery to deific.solution@hotmail.com. We'll
+                                            get back to you shortly.
                                         </p>
                                         <button
                                             onClick={() => setSubmitted(false)}
-                                            className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-red-600 to-orange-500 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/25 transition-all hover:scale-105 hover:shadow-red-500/40"
+                                            className="inline-flex items-center gap-2 px-8 py-3 mt-8 text-sm font-semibold text-white transition-all rounded-full shadow-lg bg-gradient-to-r from-red-600 to-orange-500 shadow-red-500/25 hover:scale-105 hover:shadow-red-500/40"
                                         >
-                                            Send Another Message
-                                            <ArrowRight className="h-4 w-4" />
+                                            Back to Contact Form
+                                            <ArrowRight className="w-4 h-4" />
                                         </button>
                                     </div>
                                 ) : (
@@ -511,9 +512,8 @@ export default function ContactPage() {
                                             <h3 className="text-2xl font-bold text-gray-900">
                                                 Send a Message
                                             </h3>
-                                            <p className="text-sm text-gray-500 mt-1">
-                                                Fill in the details and we'll
-                                                get back to you shortly.
+                                            <p className="mt-1 text-sm text-gray-500">
+                                                Fill in the details, then select Send Message. Your default email app will open with your enquiry filled in. Press Send in that app to email us.
                                             </p>
                                         </div>
 
@@ -545,8 +545,8 @@ export default function ContactPage() {
                                                 </label>
                                                 {errors.firstName &&
                                                     touched.firstName && (
-                                                        <p className="mt-1 text-xs text-red-500 flex items-center gap-1 animate-slide-down">
-                                                            <AlertCircle className="h-3 w-3" />
+                                                        <p className="flex items-center gap-1 mt-1 text-xs text-red-500 animate-slide-down">
+                                                            <AlertCircle className="w-3 h-3" />
                                                             {errors.firstName}
                                                         </p>
                                                     )}
@@ -579,8 +579,8 @@ export default function ContactPage() {
                                                 </label>
                                                 {errors.lastName &&
                                                     touched.lastName && (
-                                                        <p className="mt-1 text-xs text-red-500 flex items-center gap-1 animate-slide-down">
-                                                            <AlertCircle className="h-3 w-3" />
+                                                        <p className="flex items-center gap-1 mt-1 text-xs text-red-500 animate-slide-down">
+                                                            <AlertCircle className="w-3 h-3" />
                                                             {errors.lastName}
                                                         </p>
                                                     )}
@@ -612,8 +612,8 @@ export default function ContactPage() {
                                                 Email Address *
                                             </label>
                                             {errors.email && touched.email && (
-                                                <p className="mt-1 text-xs text-red-500 flex items-center gap-1 animate-slide-down">
-                                                    <AlertCircle className="h-3 w-3" />
+                                                <p className="flex items-center gap-1 mt-1 text-xs text-red-500 animate-slide-down">
+                                                    <AlertCircle className="w-3 h-3" />
                                                     {errors.email}
                                                 </p>
                                             )}
@@ -645,8 +645,8 @@ export default function ContactPage() {
                                                 Phone Number *
                                             </label>
                                             {errors.phone && touched.phone && (
-                                                <p className="mt-1 text-xs text-red-500 flex items-center gap-1 animate-slide-down">
-                                                    <AlertCircle className="h-3 w-3" />
+                                                <p className="flex items-center gap-1 mt-1 text-xs text-red-500 animate-slide-down">
+                                                    <AlertCircle className="w-3 h-3" />
                                                     {errors.phone}
                                                 </p>
                                             )}
@@ -702,8 +702,8 @@ export default function ContactPage() {
                                             </label>
                                             {errors.service &&
                                                 touched.service && (
-                                                    <p className="mt-1 text-xs text-red-500 flex items-center gap-1 animate-slide-down">
-                                                        <AlertCircle className="h-3 w-3" />
+                                                    <p className="flex items-center gap-1 mt-1 text-xs text-red-500 animate-slide-down">
+                                                        <AlertCircle className="w-3 h-3" />
                                                         {errors.service}
                                                     </p>
                                                 )}
@@ -733,27 +733,27 @@ export default function ContactPage() {
                                             </label>
                                             {errors.message &&
                                                 touched.message && (
-                                                    <p className="mt-1 text-xs text-red-500 flex items-center gap-1 animate-slide-down">
-                                                        <AlertCircle className="h-3 w-3" />
+                                                    <p className="flex items-center gap-1 mt-1 text-xs text-red-500 animate-slide-down">
+                                                        <AlertCircle className="w-3 h-3" />
                                                         {errors.message}
                                                     </p>
                                                 )}
-                                            <div className="text-right text-xs text-gray-400 mt-1">
+                                            <div className="mt-1 text-xs text-right text-gray-400">
                                                 {formData.message.length} / 500
                                             </div>
                                         </div>
 
                                         {/* Captcha */}
-                                        {/* <div className="rounded-xl border border-gray-200 bg-gray-50/50 p-4">
+                                        {/* <div className="p-4 border border-gray-200 rounded-xl bg-gray-50/50">
                                             <div className="flex items-center gap-2 mb-3">
-                                                <ShieldCheck className="h-4 w-4 text-red-500" />
-                                                <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                                                <ShieldCheck className="w-4 h-4 text-red-500" />
+                                                <span className="text-xs font-semibold tracking-wider text-gray-500 uppercase">
                                                     Security Check
                                                 </span>
                                             </div>
                                             <div className="flex flex-wrap items-center gap-3">
                                                 <div className="flex items-center gap-2 rounded-lg bg-white border border-gray-200 px-4 py-2.5 select-none">
-                                                    <span className="text-base font-bold text-gray-800 tracking-wider">
+                                                    <span className="text-base font-bold tracking-wider text-gray-800">
                                                         {captcha.num1} + {captcha.num2} =
                                                     </span>
                                                 </div>
@@ -777,59 +777,30 @@ export default function ContactPage() {
                                                 <button
                                                     type="button"
                                                     onClick={refreshCaptcha}
-                                                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 transition-all hover:text-red-600 hover:border-red-200"
+                                                    className="flex items-center justify-center w-10 h-10 text-gray-500 transition-all bg-white border border-gray-200 rounded-lg hover:text-red-600 hover:border-red-200"
                                                     aria-label="Refresh captcha"
                                                     title="Get a new question"
                                                 >
-                                                    <RefreshCw className="h-4 w-4" />
+                                                    <RefreshCw className="w-4 h-4" />
                                                 </button>
                                             </div>
                                             {errors.captcha &&
                                                 captchaTouched && (
-                                                    <p className="mt-2 text-xs text-red-500 flex items-center gap-1 animate-slide-down">
-                                                        <AlertCircle className="h-3 w-3" />
+                                                    <p className="flex items-center gap-1 mt-2 text-xs text-red-500 animate-slide-down">
+                                                        <AlertCircle className="w-3 h-3" />
                                                         {errors.captcha}
                                                     </p>
                                                 )}
                                         </div> */}
 
-                                        {/* Submit */}
+                                        {/* Opens the user's email app with the enquiry pre-filled. */}
                                         <button
                                             type="submit"
-                                            disabled={loading}
-                                            className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-red-600 to-orange-500 px-6 py-4 text-base font-bold text-white shadow-lg shadow-red-500/25 transition-all hover:scale-[1.02] hover:shadow-red-500/40 disabled:opacity-70 disabled:cursor-not-allowed"
+                                            className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-red-600 to-orange-500 px-6 py-4 text-base font-bold text-white shadow-lg shadow-red-500/25 transition-all hover:scale-[1.02] hover:shadow-red-500/40"
                                         >
                                             <span className="relative flex items-center justify-center gap-2">
-                                                {loading ? (
-                                                    <>
-                                                        <svg
-                                                            className="h-5 w-5 animate-spin text-white"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                        >
-                                                            <circle
-                                                                className="opacity-25"
-                                                                cx="12"
-                                                                cy="12"
-                                                                r="10"
-                                                                stroke="currentColor"
-                                                                strokeWidth="4"
-                                                            />
-                                                            <path
-                                                                className="opacity-75"
-                                                                fill="currentColor"
-                                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                                            />
-                                                        </svg>
-                                                        Sending...
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        Send Message
-                                                        <Send className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                                                    </>
-                                                 )} 
+                                                Open Email to Send
+                                                <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                                             </span>
                                         </button>
                                     </form>
@@ -841,16 +812,16 @@ export default function ContactPage() {
             </section>
 
             {/* ===== OUR OFFICE LOCATIONS ===== */}
-            <section className="bg-white py-16 md:py-20">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12 animate-on-scroll">
-                        <span className="inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-red-700 mb-3">
+            <section className="py-16 bg-white md:py-20">
+                <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="mb-12 text-center animate-on-scroll">
+                        <span className="inline-block px-3 py-1 mb-3 text-xs font-semibold tracking-wider text-red-700 uppercase bg-red-100 rounded-full">
                             Our Offices
                         </span>
                         <h2 className="text-3xl font-bold text-gray-900">
                             Our Office
                         </h2>
-                        <p className="mt-2 text-gray-500 max-w-2xl mx-auto">
+                        <p className="max-w-2xl mx-auto mt-2 text-gray-500">
                             We have a global presence with offices in three
                             countries. Reach out to the location nearest to you.
                         </p>
@@ -860,7 +831,7 @@ export default function ContactPage() {
                         {officeLocations.map((location, index) => (
                             <div
                                 key={location.country}
-                                className="group rounded-2xl bg-white border border-gray-100 p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-red-100/30 animate-on-scroll"
+                                className="p-6 transition-all duration-300 bg-white border border-gray-100 shadow-sm group rounded-2xl hover:-translate-y-2 hover:shadow-xl hover:shadow-red-100/30 animate-on-scroll"
                                 style={{ animationDelay: `${index * 100}ms` }}
                             >
                                 {/* Header with flag and country */}
@@ -872,7 +843,7 @@ export default function ContactPage() {
                                         <h3 className="text-xl font-bold text-gray-900">
                                             {location.country}
                                         </h3>
-                                        <p className="text-xs font-medium text-red-600 uppercase tracking-wider">
+                                        <p className="text-xs font-medium tracking-wider text-red-600 uppercase">
                                             {location.type}
                                         </p>
                                     </div>
@@ -881,17 +852,17 @@ export default function ContactPage() {
                                 {/* Address */}
                                 <div className="flex items-start gap-3 mb-3">
                                     <MapPin className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
-                                    <p className="text-sm text-gray-600 leading-relaxed">
+                                    <p className="text-sm leading-relaxed text-gray-600">
                                         {location.address}
                                     </p>
                                 </div>
 
                                 {/* Email */}
                                 <div className="flex items-center gap-3 mb-2">
-                                    <Mail className="h-5 w-5 text-red-500 shrink-0" />
+                                    <Mail className="w-5 h-5 text-red-500 shrink-0" />
                                     <a
                                         href={`mailto:${location.email}`}
-                                        className="text-sm text-gray-600 hover:text-red-600 transition-colors"
+                                        className="text-sm text-gray-600 transition-colors hover:text-red-600"
                                     >
                                         {location.email}
                                     </a>
@@ -899,13 +870,13 @@ export default function ContactPage() {
 
                                 {/* Phone */}
                                 <div className="flex items-center gap-3">
-                                    <Phone className="h-5 w-5 text-red-500 shrink-0" />
+                                    <Phone className="w-5 h-5 text-red-500 shrink-0" />
                                     <a
                                         href={`tel:${location.phone.replace(
                                             /[()\s+]/g,
                                             ""
                                         )}`}
-                                        className="text-sm text-gray-600 hover:text-red-600 transition-colors"
+                                        className="text-sm text-gray-600 transition-colors hover:text-red-600"
                                     >
                                         {location.phone}
                                     </a>
@@ -920,10 +891,10 @@ export default function ContactPage() {
             </section>
 
             {/* ===== MAP ===== */}
-            <section className="bg-gray-50/50 py-16">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-10 animate-on-scroll">
-                        <span className="inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-red-700 mb-3">
+            <section className="py-16 bg-gray-50/50">
+                <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="mb-10 text-center animate-on-scroll">
+                        <span className="inline-block px-3 py-1 mb-3 text-xs font-semibold tracking-wider text-red-700 uppercase bg-red-100 rounded-full">
                             Find Us
                         </span>
                         <h2 className="text-3xl font-bold text-gray-900">
@@ -934,7 +905,7 @@ export default function ContactPage() {
                             our headquarters.
                         </p>
                     </div>
-                    <div className="overflow-hidden rounded-2xl shadow-xl border border-gray-100 animate-on-scroll">
+                    <div className="overflow-hidden border border-gray-100 shadow-xl rounded-2xl animate-on-scroll">
                         <div className="aspect-[16/6] w-full bg-gray-200 relative">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3570.123456789012!2d80.218!3d26.457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c3f8f8f8f8f8f%3A0x8f8f8f8f8f8f8f8f!2sKanpur%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000"
@@ -949,7 +920,7 @@ export default function ContactPage() {
                             />
                             <div className="absolute bottom-4 left-4 rounded-xl bg-white/90 backdrop-blur-sm px-4 py-2.5 shadow-lg border border-white/20">
                                 <div className="flex items-center gap-2">
-                                    <MapPin className="h-4 w-4 text-red-600" />
+                                    <MapPin className="w-4 h-4 text-red-600" />
                                     <span className="text-sm font-medium text-gray-900">
                                         8th Floor A1/4, Lakhanpur, Kanpur
                                     </span>
@@ -961,10 +932,10 @@ export default function ContactPage() {
             </section>
 
             {/* ===== FAQ ===== */}
-            <section className="bg-white py-16 md:py-20">
-                <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12 animate-on-scroll">
-                        <span className="inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-red-700 mb-3">
+            <section className="py-16 bg-white md:py-20">
+                <div className="max-w-3xl px-4 mx-auto sm:px-6 lg:px-8">
+                    <div className="mb-12 text-center animate-on-scroll">
+                        <span className="inline-block px-3 py-1 mb-3 text-xs font-semibold tracking-wider text-red-700 uppercase bg-red-100 rounded-full">
                             FAQ
                         </span>
                         <h2 className="text-3xl font-bold text-gray-900">
@@ -980,7 +951,7 @@ export default function ContactPage() {
                         {faqs.map((faq, index) => (
                             <div
                                 key={index}
-                                className="rounded-2xl bg-gray-50/50 border border-gray-100 overflow-hidden shadow-sm transition-all hover:shadow-md animate-on-scroll"
+                                className="overflow-hidden transition-all border border-gray-100 shadow-sm rounded-2xl bg-gray-50/50 hover:shadow-md animate-on-scroll"
                                 style={{ animationDelay: `${index * 80}ms` }}
                             >
                                 <button
@@ -989,16 +960,16 @@ export default function ContactPage() {
                                             faqOpen === index ? null : index
                                         )
                                     }
-                                    className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-gray-100/50"
+                                    className="flex items-center justify-between w-full px-6 py-4 text-left transition-colors hover:bg-gray-100/50"
                                 >
                                     <span className="font-medium text-gray-900">
                                         {faq.question}
                                     </span>
-                                    <span className="ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-50 text-red-600 transition-all">
+                                    <span className="flex items-center justify-center w-8 h-8 ml-4 text-red-600 transition-all rounded-full shrink-0 bg-red-50">
                                         {faqOpen === index ? (
-                                            <ChevronUp className="h-4 w-4" />
+                                            <ChevronUp className="w-4 h-4" />
                                         ) : (
-                                            <ChevronDown className="h-4 w-4" />
+                                            <ChevronDown className="w-4 h-4" />
                                         )}
                                     </span>
                                 </button>
@@ -1009,7 +980,7 @@ export default function ContactPage() {
                                             : "max-h-0 opacity-0"
                                     }`}
                                 >
-                                    <div className="px-6 pb-5 pt-1 text-gray-500 leading-relaxed border-t border-gray-100">
+                                    <div className="px-6 pt-1 pb-5 leading-relaxed text-gray-500 border-t border-gray-100">
                                         {faq.answer}
                                     </div>
                                 </div>
@@ -1020,32 +991,32 @@ export default function ContactPage() {
             </section>
 
             {/* ===== CTA BANNER ===== */}
-            <section className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-red-900 py-16">
+            <section className="relative py-16 overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-red-900">
                 <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-red-500/20 blur-3xl" />
-                    <div className="absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-blue-500/20 blur-3xl" />
+                    <div className="absolute rounded-full -top-20 -right-20 h-60 w-60 bg-red-500/20 blur-3xl" />
+                    <div className="absolute rounded-full -bottom-20 -left-20 h-60 w-60 bg-blue-500/20 blur-3xl" />
                 </div>
-                <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+                <div className="relative max-w-4xl px-4 mx-auto text-center sm:px-6 lg:px-8">
                     <h2 className="text-3xl font-bold text-white md:text-4xl">
                         Ready to Start Your Project?
                     </h2>
-                    <p className="mx-auto mt-4 max-w-2xl text-white/70">
+                    <p className="max-w-2xl mx-auto mt-4 text-white/70">
                         Let's discuss your ideas and turn them into reality.
                         Book a free consultation with our experts today.
                     </p>
-                    <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                    <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
                         <a
                             href="#contact-form"
                             className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-red-600 to-orange-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-red-500/25 transition-all hover:scale-105 hover:shadow-red-500/40"
                         >
                             Get Started
-                            <ArrowRight className="h-4 w-4" />
+                            <ArrowRight className="w-4 h-4" />
                         </a>
                         <a
                             href="tel:+918750200899"
                             className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:scale-105"
                         >
-                            <Phone className="h-4 w-4" />
+                            <Phone className="w-4 h-4" />
                             Call Now
                         </a>
                     </div>
